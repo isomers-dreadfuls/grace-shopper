@@ -32,6 +32,13 @@ export const fetchAllProducts = () => async dispatch => {
   dispatch(action)
 }
 
+export const addNewReview = reviewInfo => async dispatch => {
+  const res = await axios.put('/api/reviews', reviewInfo)
+  const product = res.data
+  const action = getProduct(product)
+  dispatch(action)
+}
+
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS:
