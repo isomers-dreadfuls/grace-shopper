@@ -5,6 +5,15 @@ const Order = require('./order')
 const Review = require('./review')
 const Inventory = require('./inventory')
 
+User.hasMany(Order)
+Order.belongsTo(User)
+
+User.hasMany(Review)
+Review.belongsTo(User)
+
+User.hasMany(Payment)
+Payment.belongsTo(User)
+
 Product.hasMany(Inventory)
 Inventory.belongsTo(Product)
 

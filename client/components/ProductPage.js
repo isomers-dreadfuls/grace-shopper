@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
+import {ReviewsList} from './index'
 
 class ProductPage extends React.Component {
   componentDidMount() {
@@ -17,6 +18,7 @@ class ProductPage extends React.Component {
           <h3>{singleProduct.price}</h3>
           <h4>{singleProduct.description}</h4>
         </div>
+        <ReviewsList />
       </div>
     )
   }
