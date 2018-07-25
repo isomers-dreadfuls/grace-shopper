@@ -3,8 +3,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
-
-//PERSONAL INFO
+  //PERSONAL INFO
   firstName: {
     type: Sequelize.STRING,
     allowNull: false // Unsure if we can allow null
@@ -13,7 +12,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false // Unsure if we can allow null
   },
-  email:{
+  email: {
     type: Sequelize.STRING,
     isEmail: true,
     allowNull: false
@@ -22,7 +21,7 @@ const User = db.define('user', {
     type: Sequelize.STRING //ADD HOOK
   },
 
-//SECURITY   
+  //SECURITY
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -39,8 +38,8 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
-  
-//ADDRESS
+
+  //ADDRESS
   userAddress: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -70,12 +69,11 @@ const User = db.define('user', {
     }
   },
 
-
-//ADMIN STATUS
+  //ADMIN STATUS
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
-  },
+  }
 })
 
 /**
@@ -84,8 +82,6 @@ const User = db.define('user', {
 User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
-
-
 
 /**
  * classMethods
@@ -113,13 +109,11 @@ const setSaltAndPassword = user => {
 }
 
 const setFullName = user => {
-  user.fullName = user.firstName + " " + user.lastName
+  user.fullName = user.firstName + ' ' + user.lastName
 }
-
-
 
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
 User.afterCreate(setFullName)
 
-module.exports = {User}
+module.exports = User
