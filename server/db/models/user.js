@@ -54,11 +54,11 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
   },
 
-  // //ADMIN STATUS
-  // isAdmin: {
-  //   type: Sequelize.BOOLEAN,
-  //   defaultValue: false
-  // }
+  //ADMIN STATUS
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 })
 
 /**
