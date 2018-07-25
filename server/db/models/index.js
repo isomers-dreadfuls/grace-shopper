@@ -17,8 +17,8 @@ User.hasMany(Order)
 Order.hasOne(Payment)
 Payment.belongsTo(Order)
 
-Order.hasMany(Inventory, {through: 'ItemsArray'})
-Inventory.hasMany(Order, {through: 'ItemsArray'})
+Order.belongsToMany(Inventory, {through: 'ItemsArray'})
+Inventory.belongsToMany(Order, {through: 'ItemsArray'})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
