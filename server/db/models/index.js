@@ -14,8 +14,8 @@ Review.belongsTo(Product)
 Order.belongsTo(User)
 User.hasMany(Order)
 
-Order.hasOne(Payment)
-Payment.belongsTo(Order)
+Order.belongsTo(Payment)
+Payment.hasMany(Order)
 
 Order.belongsToMany(Inventory, {through: 'ItemsArray'})
 Inventory.belongsToMany(Order, {through: 'ItemsArray'})
