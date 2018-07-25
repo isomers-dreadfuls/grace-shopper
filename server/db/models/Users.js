@@ -121,3 +121,5 @@ const setSaltAndPassword = user => {
 Users.beforeCreate(setSaltAndPassword)
 Users.beforeUpdate(setSaltAndPassword)
 Users.afterCreate(setFullName)
+
+module.exports = {Users}
