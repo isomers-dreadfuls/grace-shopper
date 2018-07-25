@@ -7,7 +7,7 @@ import { runInNewContext } from 'vm';
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-const NEW_USER = 'NEW_USER'
+
 
 /**
  * INITIAL STATE
@@ -19,10 +19,6 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-const newUser = (newSignee) => ({
-  type: NEW_USER,
-  newSignee
-})
 
 /**
  * THUNK CREATORS
@@ -61,6 +57,7 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
+
 
 /**
  * REDUCER
