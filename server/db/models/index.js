@@ -5,10 +5,6 @@ const Payment = require('./payment')
 const Order = require('./order')
 const Review = require('./review')
 const Inventory = require('./inventory')
-<<<<<<< HEAD
-=======
-
->>>>>>> 506f7966bba054d9d60511888f9d60ce4363534c
 
 Product.hasMany(Inventory)
 Inventory.belongsTo(Product)
@@ -25,6 +21,13 @@ Payment.hasMany(Order)
 Order.belongsToMany(Inventory, {through: 'order_inventory'})
 Inventory.belongsToMany(Order, {through: 'order_inventory'})
 
+User.hasMany(Review)
+Review.belongsTo(User)
+
+User.hasMany(Payment)
+Payment.belongsTo(User)
+
+
 /**
  * We'll export all of our models here, so that any time a module needs a model,
  * we can just require it from 'db/models'
@@ -32,10 +35,6 @@ Inventory.belongsToMany(Order, {through: 'order_inventory'})
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-<<<<<<< HEAD
-
-=======
->>>>>>> 506f7966bba054d9d60511888f9d60ce4363534c
   User,
   Product,
   Payment,
