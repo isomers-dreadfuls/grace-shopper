@@ -1,4 +1,6 @@
 const User = require('./user')
+const Payment = require('./payment')
+const Review = require('./review')
 
 /**
  * If we had any associations to make, this would be a great place to put them!
