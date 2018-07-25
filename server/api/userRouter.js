@@ -12,12 +12,11 @@ router.get("/", async (req, res, next) => {
 
 router.get("/:id", async (req, res, next) => {
   try {
-    const user = await User.findById(req.params.id)
+    const user = await User.findById(req.params.id) //ADD USER'S ORDERS WHEN POSSIBLE
     res.json(user)
   } catch (error) {
-    next(error);
+    next(error)
   }
 })
-
 
 module.exports = router

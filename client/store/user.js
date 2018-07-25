@@ -1,11 +1,13 @@
 import axios from 'axios'
 import history from '../history'
+import { runInNewContext } from 'vm';
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+
 
 /**
  * INITIAL STATE
@@ -55,6 +57,7 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
+
 
 /**
  * REDUCER

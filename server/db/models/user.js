@@ -6,11 +6,11 @@ const User = db.define('user', {
   //PERSONAL INFO
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false // Unsure if we can allow null
+    allowNull: true // Unsure if we can allow null
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false // Unsure if we can allow null
+    allowNull: true // Unsure if we can allow null
   },
   email: {
     type: Sequelize.STRING,
@@ -32,6 +32,7 @@ const User = db.define('user', {
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
     // Making `.password` act like a func hides it when serializing to JSON.
     // This is a hack to get around Sequelize's lack of a "private" option.
     get() {
@@ -42,38 +43,22 @@ const User = db.define('user', {
   //ADDRESS
   userAddress: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   userCity: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   userState: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
   userZip: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
   },
 
-  //ADMIN STATUS
-  isAdmin: {
-    type: Sequelize.BOOLEAN,
-    defaultValue: false
-  }
+  // //ADMIN STATUS
+  // isAdmin: {
+  //   type: Sequelize.BOOLEAN,
+  //   defaultValue: false
+  // }
 })
 
 /**
