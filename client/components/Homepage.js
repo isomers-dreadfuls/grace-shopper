@@ -8,6 +8,7 @@ class Homepage extends React.Component {
     await this.props.fetchAllProducts()
   }
   render() {
+    const newProducts = this.props.newProducts
     return (
       <React.Fragment>
         <div>
@@ -15,11 +16,13 @@ class Homepage extends React.Component {
         </div>
         <div>
           <h3>New Products</h3>
-          <Link to="">Product 1</Link>
-          <Link to="">Product 2</Link>
-          <Link to="">Product 3</Link>
-          <Link to="">Product 4</Link>
-          <Link to="">Product 5</Link>
+          {newProducts.map(product => {
+            return (
+              <Link key={product.id} to={`/products/${product.id}`}>
+                {product.name}
+              </Link>
+            )
+          })}
         </div>
       </React.Fragment>
     )
@@ -27,7 +30,7 @@ class Homepage extends React.Component {
 }
 
 const mapStateToProps = state => {
-  let allProducts = state.product.allProducts || []
+  let allProducts = state.product.allProducts
   let newProducts = allProducts.sort((a, b) => a.createdAt > b.createdAt)
   return {
     newProducts: newProducts.slice(0, 5)
