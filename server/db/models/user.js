@@ -3,10 +3,32 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const User = db.define('user', {
+  //PERSONAL INFO
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false // Unsure if we can allow null
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false // Unsure if we can allow null
+  },
   email: {
     type: Sequelize.STRING,
-    unique: true,
+    isEmail: true,
     allowNull: false
+  },
+  fullName: {
+    type: Sequelize.STRING //ADD HOOK
+  },
+
+  //SECURITY
+  salt: {
+    type: Sequelize.STRING,
+    // Making `.salt` act like a function hides it when serializing to JSON.
+    // This is a hack to get around Sequelize's lack of a "private" option.
+    get() {
+      return () => this.getDataValue('salt')
+    }
   },
   password: {
     type: Sequelize.STRING,
@@ -16,20 +38,43 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
-  salt: {
+
+  //ADDRESS
+  userAddress: {
     type: Sequelize.STRING,
-    // Making `.salt` act like a function hides it when serializing to JSON.
-    // This is a hack to get around Sequelize's lack of a "private" option.
-    get() {
-      return () => this.getDataValue('salt')
+    allowNull: false,
+    validate: {
+      notEmpty: true
     }
   },
-  googleId: {
-    type: Sequelize.STRING
+  userCity: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  userState: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+  userZip: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
+
+  //ADMIN STATUS
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
   }
 })
-
-module.exports = User
 
 /**
  * instanceMethods
@@ -63,5 +108,12 @@ const setSaltAndPassword = user => {
   }
 }
 
+const setFullName = user => {
+  user.fullName = user.firstName + ' ' + user.lastName
+}
+
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
+User.afterCreate(setFullName)
+
+module.exports = User
