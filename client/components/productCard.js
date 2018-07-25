@@ -7,9 +7,10 @@ class ProductCard extends React.Component {
     await this.fetchAllProducts()
   }
   render() {
+    console.log(this.props.product)
     return (
       <React.Fragment>
-        <div />
+        <div>Product Name</div>
       </React.Fragment>
     )
   }

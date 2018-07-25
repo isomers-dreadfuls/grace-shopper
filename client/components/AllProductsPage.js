@@ -1,18 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/product'
-import ProductCard from './productCard'
+import {ProductCard} from './index'
 
-class ProductsPage extends React.Component {
+class AllProductsPage extends React.Component {
   async componentDidMount() {
-    await this.fetchAllProducts()
+    await this.props.fetchAllProducts()
   }
   render() {
     return (
       <React.Fragment>
         {this.props.allProducts.map(product => {
-          return <ProductCard key={product.id} />
+          return <ProductCard key={product.id} product={product} />
         })}
       </React.Fragment>
     )
@@ -27,8 +26,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllProducts: () => dispatch(fetchAllProducts)
+    fetchAllProducts: () => {
+      dispatch(fetchAllProducts())
+    }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage)
+export default connect(mapStateToProps, mapDispatchToProps)(AllProductsPage)

@@ -5,7 +5,7 @@ import {fetchAllProducts} from '../store/product'
 
 class Homepage extends React.Component {
   async componentDidMount() {
-    await this.fetchAllProducts()
+    await this.props.fetchAllProducts()
   }
   render() {
     return (
@@ -36,7 +36,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchAllProducts: () => dispatch(fetchAllProducts)
+    fetchAllProducts: () => {
+      dispatch(fetchAllProducts())
+    }
   }
 }
 
