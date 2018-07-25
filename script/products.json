@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Squirrel Sweater",
+    "price": 20,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "This ugly sweater features squirrel."
+  },
+  {
+    "name": "Pirate Sweater",
+    "price": 30,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "Pirate sweater description."
+  },
+  {
+    "name": "Blobfish Sweater",
+    "price": 33,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "Blobfish sweater description."
+  },
+  {
+    "name": "Mole Rat Sweater",
+    "price": 100,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "Mole Rat sweater description."
+  },
+  {
+    "name": "Viperfish Sweater",
+    "price": 45,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "Viperfish sweater description."
+  },
+  {
+    "name": "Squirrel Sweater",
+    "price": 20,
+    "image": "/img/product/default-sweater-square.png",
+    "description": "This ugly sweater features squirrel."
+  }
+]
