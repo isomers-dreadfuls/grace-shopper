@@ -24,4 +24,4 @@ deploy:
   provider: heroku
   app: isomers.herokuapp.com # see README
   api_key:
-    secure: YOUR-***ENCRYPTED***-API-KEY-HERE # see README
+    secure: "lUNlqiIVJ2iAr4e/ZwsM/l1dCkQqbZdOWUDUotPsX9ZpxTx3v96/LIoCCk/EuanFWexbAiVtEEfDF6SpTMsjrlpQFBE5L1M15xEEIcjsqYmkfGfn418Eghn9NH1qSAgGhujAh5b4Pfyh8gKzCxvMnbZSIXJ2dN80hkHXkOL1s+U3kGHFHJ/X5Wje8bkHI/gAtt87AJzoSCWD7DgjAZhSdW2Dal9C8BA3+X9fPD5KJ5d4bq7NuLnJ7wyLCd+CRlJluiitoFaxa/kggA+eKJqr6Cnv+0uMGIZ9H+owxtIn+Df094mo3GscFdr8EKTc/0xs+e9Nqi0aZGoTiwYKyB/Zevv/UBona/m1Fbi8rjjTwLg+aHAqwo0SS1rPuapbY6KFdPH/ExjprAE1A0dhf8WytkK4xKb90X/Z4wNCz8YW2UB5p4t9CkE9YUzkrR5cmceGg/OkS0YHFmeUa8eO/O/3dOFI+uRvpIG4DcVSjEqVRjmPpza+MuUyRdl32HIhqqkM5sogu3lPpGzb7XED/OxC5mzEQV+ca/k3rxqozr9ddw3xU+9SYotKOhTQ9KI1Q9u1aFnhYU1lcOQnhiTYa3U6nZrmsvBeao+aTtTaetH13K+65gmDRxSXW1Is0L/OiIeNMDoiV+0E4l+FloBAOlCTfOf7k9nnILAAl17um+rghoY=" # see README
