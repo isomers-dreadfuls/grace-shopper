@@ -1,17 +1,26 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link } from 'react-router-dom'
 import {logout} from '../store'
-import {Dropdown, Menu} from 'semantic-ui-react'
+import { Dropdown, Menu } from 'semantic-ui-react'
+import history from '../history'
 
-const options = [
-  {key: 1, text: 'Edit Account', value: 1},
-  {key: 2, text: 'Orders', value: 2},
-  {key: 3, text: 'Log Out', value: 3}
-]
-
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, user}) =>  { 
+ 
+  const options = [
+    {text: 'View My Account', onClick: () => {
+      history.push(`/user/${user.id}`)
+    }},
+    {text: 'View Orders', onClick: () => {
+      console.log("VIEW ORDERS")
+    }},
+    {text: 'Log Out', onClick: () => {
+      console.log("LOG OUT")
+    }},
+  ]  
+  
+  return (
   <div id="navbar-container">
     <h1>Isomers</h1>
     <nav>
@@ -19,6 +28,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
         <div>
           {/* The navbar will show these links after you log in */}
           <div className="ui menu">
+
             <Link to="/" className="item">
               Home
             </Link>
@@ -71,14 +81,16 @@ const Navbar = ({handleClick, isLoggedIn}) => (
     </nav>
     <hr />
   </div>
-)
+)}
 
 /**
  * CONTAINER
  */
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user,
+    state: state
   }
 }
 

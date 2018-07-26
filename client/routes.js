@@ -10,6 +10,7 @@ import {
   Homepage,
   UserHome,
   CartPage,
+  UserInfoPage,
   Checkout
 } from './components'
 import {me} from './store'
@@ -20,11 +21,11 @@ import {me} from './store'
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
+    
   }
 
   render() {
     const {isLoggedIn} = this.props
-
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
@@ -38,7 +39,8 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/user-home" component={UserHome} />
+            <Route exact path="/user/:id" component={UserInfoPage} />
+            <Route path="/user-home" component={UserHome} /> 
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
