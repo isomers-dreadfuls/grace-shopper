@@ -34,4 +34,21 @@ router.put('/addToCart', async (req, res, next) => {
   }
 })
 
+router.put('/reduceFromCart', async (req, res, next) => {
+  try {
+    const cartProduct = await Cart.findOne({
+      where: {
+        userId: 1,
+        inventoryId: 1
+      }
+    })
+    if (cartProduct.quantity > 1) {
+      await cartProduct.decrement('quantity')
+    }
+    res.send(cartProduct)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router

@@ -43,15 +43,15 @@ const testInfo = [
 const initialState = testInfo
 
 const ADD_TO_CART = 'ADD_TO_CART'
-const REMOVE_FROM_CART = 'REMOVE_FROM_CART'
+const REDUCE_FROM_CART = 'REDUCE_FROM_CART'
 
 export const addToCart = product => ({
   type: ADD_TO_CART,
   product
 })
 
-export const removeFromCart = product => ({
-  type: REMOVE_FROM_CART,
+export const reduceFromCart = product => ({
+  type: REDUCE_FROM_CART,
   product
 })
 
@@ -59,6 +59,12 @@ export const addToUserCart = ids => async dispatch => {
   const response = await axios.put('/api/users/addToCart', {ids})
   const addedProduct = response.data
   dispatch(addToCart(addedProduct))
+}
+
+export const removeFromUserCart = ids => async dispatch => {
+  const response = await axios.put('/api/users/reduceFromCart', {ids})
+  const removedProduct = response.data
+  dispatch(reduceFromCart(removedProduct))
 }
 
 // export const removeFromUserCart = product => async dispatch => {
@@ -69,6 +75,11 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
       return [...state, action.product]
+    case REDUCE_FROM_CART:
+      return [
+        ...state.filter(elem => elem.id !== action.product.id),
+        action.product
+      ]
     default:
       return state
   }
