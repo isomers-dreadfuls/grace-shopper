@@ -15,7 +15,7 @@ class ProductPage extends React.Component {
         <img src={singleProduct.image} />
         <div id="product-page-info">
           <h2>{singleProduct.name}</h2>
-          <h3>{singleProduct.price}</h3>
+          <h3>${singleProduct.price}</h3>
           <h4>{singleProduct.description}</h4>
         </div>
         <ReviewsList />
@@ -26,7 +26,7 @@ class ProductPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.singleProduct || {}
+    singleProduct: state.product.singleProduct || {}
   }
 }
 
