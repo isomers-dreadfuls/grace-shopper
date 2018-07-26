@@ -42,9 +42,9 @@ const Navbar = ({handleClick, isLoggedIn, user}) =>  {
               <Link to="/cart" className="item">
                 Cart
               </Link>
-            <div className="right menu" >
-              <Dropdown text='My Account' options={options} className="item" />
-            </div>
+              <Menu compact>
+                <Dropdown text='My Account' options={options} simple item />
+              </Menu>
               <a href="#" className="item" onClick={handleClick}>
                 Logout
               </a>
