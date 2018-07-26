@@ -4,11 +4,8 @@ const db = require('../db')
 const Cart = db.define('cart', {
   quantity: {
     type: Sequelize.INTEGER,
-    allowNull: false,
-    validate: {
-      isEmpty: false
-    }
-  },
+    defaultValue: 0
+  }
 })
 
 module.exports = Cart
