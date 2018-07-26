@@ -2,7 +2,7 @@ import React from 'react'
 
 const ProductRow = props => {
   return (
-    <div>
+    <React.Fragment>
       <img src={props.product.inventory.product.image} />
       <div>
         <h3>{props.product.inventory.product.name}</h3>
@@ -24,7 +24,7 @@ const ProductRow = props => {
           })}
         </selector>
       </form>
-    </div>
+    </React.Fragment>
   )
 }
 
