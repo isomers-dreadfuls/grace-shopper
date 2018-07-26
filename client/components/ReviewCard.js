@@ -3,10 +3,12 @@ import React from 'react'
 const ReviewCard = props => {
   return (
     <React.Fragment>
-      <div>
-        <h4>{`${props.review.rating} / 5`}</h4>
-        <h4>{props.review.reviewText}</h4>
-        <h5>{props.review.user.email}</h5>
+      <div className="ui red fluid card">
+        <div className="content">
+          <div className="header">{`${props.review.rating} / 5`}</div>
+          <div className="meta">{props.review.user.email}</div>
+          <div className="description">{props.review.reviewText}</div>
+        </div>
       </div>
     </React.Fragment>
   )

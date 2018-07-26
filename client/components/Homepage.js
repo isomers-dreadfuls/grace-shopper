@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts} from '../store/product'
+import {ProductCard} from './index'
 
 class Homepage extends React.Component {
   async componentDidMount() {
@@ -14,14 +15,10 @@ class Homepage extends React.Component {
         <div>
           <Link to="/products">Go To All Products</Link>
         </div>
-        <div>
-          <h3>New Products</h3>
+        <h3>New Products</h3>
+        <div className="ui five cards">
           {newProducts.map(product => {
-            return (
-              <Link key={product.id} to={`/products/${product.id}`}>
-                {product.name}
-              </Link>
-            )
+            return <ProductCard key={product.id} product={product} />
           })}
         </div>
       </React.Fragment>

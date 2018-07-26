@@ -25,16 +25,18 @@ class ReviewsList extends React.Component {
         {this.props.allReviews.map(review => {
           return <ReviewCard key={review.id} review={review} />
         })}
-        <form onSubmit={this.handleSubmit}>
-          <span>
+        <form className="ui form" onSubmit={this.handleSubmit}>
+          <div>
             <input type="radio" name="rating" id="str1" value="1" />
             <input type="radio" name="rating" id="str2" value="2" />
             <input type="radio" name="rating" id="str3" value="3" />
             <input type="radio" name="rating" id="str4" value="4" />
             <input type="radio" name="rating" id="str5" value="5" />
-          </span>
-          <textarea name="reviewText" />
-          <button type="submit">Submit</button>
+          </div>
+          <textarea rows="3" name="reviewText" />
+          <button className="ui button" type="submit">
+            Submit
+          </button>
         </form>
       </React.Fragment>
     )

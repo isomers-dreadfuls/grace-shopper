@@ -11,30 +11,50 @@ const Navbar = ({handleClick, isLoggedIn}) => (
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <div>
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/about-us">About Us</Link>
-          </div>
-          <div>
-            <Link to="/cart">Cart</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
+          <div className="ui menu">
+            <Link to="/" className="item">
+              Home
+            </Link>
+            <Link to="/products" className="item">
+              Products
+            </Link>
+            <Link to="/about-us" className="item">
+              About Us
+            </Link>
+            <div className="right menu">
+              <Link to="/cart" className="item">
+                Cart
+              </Link>
+              <a href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </div>
           </div>
         </div>
       ) : (
         <div>
           {/* The navbar will show these links before you log in */}
-          <div>
-            <Link to="/">Home</Link>
-            <Link to="/products">Products</Link>
-            <Link to="/about">About</Link>
-          </div>
-          <div>
-            <Link to="/cart">Cart</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/sign-up">Sign Up</Link>
+          <div className="ui menu">
+            <Link to="/" className="item">
+              Home
+            </Link>
+            <Link to="/products" className="item">
+              Products
+            </Link>
+            <Link to="/about" className="item">
+              About
+            </Link>
+            <div className="right menu">
+              <Link to="/cart" className="item">
+                Cart
+              </Link>
+              <Link to="/login" className="item">
+                Login
+              </Link>
+              <Link to="/sign-up" className="item">
+                Sign Up
+              </Link>
+            </div>
           </div>
         </div>
       )}

@@ -10,9 +10,11 @@ class AllProductsPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        {this.props.allProducts.map(product => {
-          return <ProductCard key={product.id} product={product} />
-        })}
+        <div className="ui five cards">
+          {this.props.allProducts.map(product => {
+            return <ProductCard key={product.id} product={product} />
+          })}
+        </div>
       </React.Fragment>
     )
   }
