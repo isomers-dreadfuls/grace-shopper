@@ -5,10 +5,13 @@ class UserInfoPage extends Component {
   render() {
     return (
       <div>
-        <p>yo</p>
+        
       </div>
     )
   }
 }
 
+const mapStateToProps = state => {
+  
+}
 export default UserInfoPage
