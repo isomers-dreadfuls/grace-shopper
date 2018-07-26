@@ -1,0 +1,35 @@
+[
+  {
+    "firstName": "Cody",
+    "lastName": "Pug",
+    "email": "cody@email.com",
+    "fullName": null,
+    "userAddress": "123 Dog Street",
+    "userCity": "Dogtown",
+    "userState": "NY",
+    "userZip": 10010,
+    "isAdmin": false
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Murphy",
+    "email": "murphy@email.com",
+    "fullName": null,
+    "userAddress": "333 Main Street",
+    "userCity": "New York",
+    "userState": "NY",
+    "userZip": 10010,
+    "isAdmin": false
+  },
+  {
+    "firstName": null,
+    "lastName": null,
+    "email": "steve@email.com",
+    "fullName": null,
+    "userAddress": null,
+    "userCity": null,
+    "userState": null,
+    "userZip": null,
+    "isAdmin": false
+  }
+]
