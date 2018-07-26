@@ -61,7 +61,7 @@ export const addToUserCart = ids => async dispatch => {
   dispatch(addToCart(addedProduct))
 }
 
-export const removeFromUserCart = ids => async dispatch => {
+export const reduceFromUserCart = ids => async dispatch => {
   const response = await axios.put('/api/users/reduceFromCart', {ids})
   const removedProduct = response.data
   dispatch(reduceFromCart(removedProduct))
