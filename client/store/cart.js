@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const testInfo = [
   {
+    id: 1,
     userId: 1,
     inventoryId: 1,
     quantity: 3,
@@ -20,6 +21,7 @@ const testInfo = [
     }
   },
   {
+    id: 2,
     userId: 1,
     inventoryId: 2,
     quantity: 2,

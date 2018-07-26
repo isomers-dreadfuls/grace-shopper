@@ -12,7 +12,7 @@ class CartPage extends React.Component {
           ))}
         </div>
         <div id="cart-summary-container">
-          {/* <CartSummary cart={this.props.cart} /> */}
+          <CartSummary cart={this.props.cart} />
         </div>
       </div>
     )
