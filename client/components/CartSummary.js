@@ -7,7 +7,7 @@ const CartSummary = props => {
     cart.map(cartItem => {
       subtotal += cartItem.quantity * cartItem.inventory.product.price
     })
-    return subtotal
+    return subtotal.toFixed(2)
   }
 
   return (
