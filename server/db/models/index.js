@@ -29,6 +29,7 @@ Order.belongsToMany(Inventory, {through: 'order_inventory'})
 Inventory.belongsToMany(Order, {through: 'order_inventory'})
 
 User.belongsToMany(Inventory, {through: Cart})
+Inventory.belongsToMany(User, {through: Cart})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
