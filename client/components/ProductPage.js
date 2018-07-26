@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProduct} from '../store/product'
+import {ReviewsList} from './index'
 
 class ProductPage extends React.Component {
   componentDidMount() {
@@ -14,9 +15,10 @@ class ProductPage extends React.Component {
         <img src={singleProduct.image} />
         <div id="product-page-info">
           <h2>{singleProduct.name}</h2>
-          <h3>{singleProduct.price}</h3>
+          <h3>${singleProduct.price}</h3>
           <h4>{singleProduct.description}</h4>
         </div>
+        <ReviewsList />
       </div>
     )
   }
@@ -24,7 +26,7 @@ class ProductPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    singleProduct: state.singleProduct || {}
+    singleProduct: state.product.singleProduct || {}
   }
 }
 
