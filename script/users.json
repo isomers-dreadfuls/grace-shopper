@@ -8,7 +8,8 @@
     "userCity": "Dogtown",
     "userState": "NY",
     "userZip": 10010,
-    "isAdmin": false
+    "isAdmin": false,
+    "password": "123"
   },
   {
     "firstName": "Peter",
@@ -19,7 +20,8 @@
     "userCity": "New York",
     "userState": "NY",
     "userZip": 10010,
-    "isAdmin": false
+    "isAdmin": false,
+    "password": "123"
   },
   {
     "firstName": null,
@@ -30,6 +32,7 @@
     "userCity": null,
     "userState": null,
     "userZip": null,
-    "isAdmin": false
+    "isAdmin": false,
+    "password": "123"
   }
 ]

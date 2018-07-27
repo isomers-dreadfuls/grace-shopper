@@ -1,7 +1,7 @@
 [
   {
     "name": "Squirrel Sweater",
-    "price": 20,
+    "price": 19.99,
     "image": "/img/product/default-sweater-square.png",
     "description": "This ugly sweater features squirrel."
   },
@@ -13,7 +13,7 @@
   },
   {
     "name": "Blobfish Sweater",
-    "price": 33,
+    "price": 33.5,
     "image": "/img/product/default-sweater-square.png",
     "description": "Blobfish sweater description."
   },
@@ -30,9 +30,9 @@
     "description": "Viperfish sweater description."
   },
   {
-    "name": "Squirrel Sweater",
-    "price": 20,
+    "name": "Ugliest Sweater",
+    "price": 20.25,
     "image": "/img/product/default-sweater-square.png",
-    "description": "This ugly sweater features squirrel."
+    "description": "Ugliest description."
   }
 ]

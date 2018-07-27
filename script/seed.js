@@ -4,74 +4,34 @@ const db = require('../server/db')
 const {User, Product, Inventory, Review} = require('../server/db/models')
 const products = require('./products.json')
 const inventories = require('./inventories.json')
+const users = require('./users.json')
 const reviews = require('./reviews.json')
-
-/**
- * Welcome to the seed file! This seed file uses a newer language feature called...
- *
- *                  -=-= ASYNC...AWAIT -=-=
- *
- * Async-await is a joy to use! Read more about it in the MDN docs:
- *
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
- *
- * Now that you've got the main idea, check it out in practice below!
- */
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({
-      firstName: 'Cody',
-      lastName: 'Pug',
-      userAddress: '123 Dog Street',
-      userCity: 'Dogtown',
-      userState: 'NY',
-      userZip: '10010',
-      email: 'cody@email.com',
-      password: '123'
-    }),
-    User.create({
-      firstName: 'Peter',
-      lastName: 'Murphy',
-      userAddress: '333 Main Street',
-      userCity: 'New York',
-      userState: 'NY',
-      userZip: '10010',
-      email: 'murphy@email.com',
-      password: '123'
-    })
-  ])
+  // --- seed users
+  console.log('.....seeding users')
+  await Promise.all(await User.bulkCreate(users))
+  console.log(`-------> seeded ${users.length} users!`)
 
-  console.log(`seeded ${users.length} users`)
+  // --- seed products
+  console.log('.....seeding products')
+  await Promise.all(await Product.bulkCreate(products))
+  console.log(`-------> seeded ${products.length} products!`)
 
-  console.log('seeding products')
-  await Promise.all(
-    products.map(async productData => {
-      const product = await Product.create(productData)
-    })
-  )
-  console.log(`seeded ${products.length} products`)
+  // --- seed inventories
+  console.log('.....seeding inventories')
+  await Promise.all(await Inventory.bulkCreate(inventories))
+  console.log(`-------> seeded ${inventories.length} inventories!`)
 
-  console.log('seeding inventories')
-  await Promise.all(
-    inventories.map(async inventoryData => {
-      const inventory = await Inventory.create(inventoryData)
-    })
-  )
-  console.log(`seeded ${inventories.length} inventories`)
+  // --- seed reviews
+  console.log('.....seeding reviews')
+  await Promise.all(await Review.bulkCreate(reviews))
+  console.log(`-------> seeded ${reviews.length} reviews!`)
 
-  console.log('seeding reviews')
-  await Promise.all(
-    reviews.map(async reviewData => {
-      const review = await Review.create(reviewData)
-    })
-  )
-  console.log(`seeded ${reviews.length} reviews`)
-
-  console.log(`seeded successfully`)
+  console.log(`-----------> seeded successfully!`)
 }
 
 // We've separated the `seed` function from the `runSeed` function.
