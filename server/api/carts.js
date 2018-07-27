@@ -1,49 +1,73 @@
 const router = require('express').Router()
 const {Cart, Inventory, Product} = require('../db/models')
 
+const cartFromDb = userId =>
+  Cart.findAll({
+    where: {
+      userId: userId
+    },
+    include: [
+      {
+        model: Inventory,
+        include: [{model: Product}]
+      }
+    ]
+  })
+
+const findFromDb = (userId, inventoryId) =>
+  Cart.findOrCreate({
+    where: {
+      userId: userId,
+      inventoryId: inventoryId
+    }
+  })
+
 router.put('/add', async (req, res, next) => {
   try {
     if (req.body.inventoryId) {
-      const cartProduct = await Cart.findOrCreate({
-        where: {
-          userId: req.body.userId,
-          inventoryId: req.body.inventoryId
-        }
-      })
+      const cartProduct = await findFromDb(
+        req.body.userId,
+        req.body.inventoryId
+      )
       await cartProduct[0].increment('quantity', {
         by: req.body.quantity
       })
     }
-    const newCart = await Cart.findAll({
-      where: {
-        userId: req.body.userId
-      },
-      include: [
-        {
-          model: Inventory,
-          include: [{model: Product}]
-        }
-      ]
-    })
+    const newCart = await cartFromDb(req.body.userId)
     res.send(newCart)
   } catch (error) {
     next(error)
   }
 })
 
-router.put('/reduce', async (req, res, next) => {
+router.put('/edit', async (req, res, next) => {
   try {
-    const cartProduct = await Cart.findOne({
-      where: {
-        userId: 1,
-        inventoryId: 1
-      },
-      include: [{model: Inventory, include: [Product]}]
-    })
-    if (cartProduct.quantity > 1) {
-      await cartProduct.decrement('quantity')
+    if (req.body.inventoryId) {
+      const cartProduct = await findFromDb(
+        req.body.userId,
+        req.body.inventoryId
+      )
+      await cartProduct[0].update({
+        quantity: req.body.quantity
+      })
     }
-    res.send(cartProduct)
+    const newCart = await cartFromDb(req.body.userId)
+    res.send(newCart)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.put('/delete', async (req, res, next) => {
+  try {
+    await Cart.destroy({
+      where: {
+        userId: req.body.userId,
+        inventoryId: req.body.inventoryId
+      }
+    })
+    const newCart = await cartFromDb(req.body.userId)
+    res.send(newCart)
   } catch (error) {
     next(error)
   }
