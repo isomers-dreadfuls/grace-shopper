@@ -2,19 +2,19 @@
   {
     "id": 1,
     "size": "Small",
-    "quantity": 10,
+    "quantity": 1,
     "productId": 1
   },
   {
     "id": 2,
     "size": "Medium",
-    "quantity": 10,
+    "quantity": 5,
     "productId": 1
   },
   {
     "id": 3,
     "size": "Large",
-    "quantity": 10,
+    "quantity": 100,
     "productId": 1
   },
   {

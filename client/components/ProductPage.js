@@ -8,10 +8,36 @@ import {addToUserCart} from '../store/cart'
 class ProductPage extends React.Component {
   constructor() {
     super()
+    this.state = {
+      quantity: 100
+    }
     this.addToCartButton = this.addToCartButton.bind(this)
+    this.handleSizeChange = this.handleSizeChange.bind(this)
+    this.sizeCheck = this.sizeCheck.bind(this)
   }
   componentDidMount() {
     this.props.fetchProduct()
+  }
+  handleSizeChange(event) {
+    let newQuantity = this.props.inventories.filter(prod => {
+      return prod.id === +event.target.value
+    })[0].quantity
+    console.log(newQuantity)
+    this.setState({
+      quantity: newQuantity
+    })
+  }
+  sizeCheck() {
+    switch (true) {
+      case this.state.quantity === 0:
+        return <h4>This size is out of stock</h4>
+      case this.state.quantity === 1:
+        return <h4>There is only 1 left in this size!</h4>
+      case this.state.quantity <= 20:
+        return <h4>There are only {this.state.quantity} left in this size!</h4>
+      default:
+        return null
+    }
   }
   addToCartButton(event) {
     event.preventDefault()
@@ -32,7 +58,8 @@ class ProductPage extends React.Component {
           <h3>${singleProduct.price}</h3>
           <form onSubmit={this.addToCartButton}>
             <h3>Size</h3>
-            <select name="sizeSelector">
+            {this.sizeCheck()}
+            <select name="sizeSelector" onChange={this.handleSizeChange}>
               <option value="" key={0} />
               {inventories.map(item => {
                 return (
