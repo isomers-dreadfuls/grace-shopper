@@ -3,15 +3,9 @@ import {connect} from 'react-redux'
 
 class UserInfoPage extends Component {
   render() {
-    return (
-      <div>
-        
-      </div>
-    )
+    return <div>PERSONAL USER PAGE</div>
   }
 }
 
-const mapStateToProps = state => {
-  
-}
+const mapStateToProps = state => {}
 export default UserInfoPage

@@ -2,16 +2,24 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {ReviewCard} from './index'
 import {addNewReview} from '../store/product'
+import {Rating} from 'semantic-ui-react'
 
 class ReviewsList extends React.Component {
   constructor() {
     super()
+    this.state = {
+      rating: 5
+    }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleRate = this.handleRate.bind(this)
+  }
+  handleRate(event, {rating}) {
+    this.setState({rating})
   }
   handleSubmit(event) {
     event.preventDefault()
     this.props.addNewReview({
-      rating: +event.target.rating.value,
+      rating: this.state.rating,
       reviewText: event.target.reviewText.value,
       // NEED TO REVIEW
       // temporary userId as 1 if no user is selected
@@ -26,13 +34,13 @@ class ReviewsList extends React.Component {
           return <ReviewCard key={review.id} review={review} />
         })}
         <form className="ui form" onSubmit={this.handleSubmit}>
-          <div>
-            <input type="radio" name="rating" id="str1" value="1" />
-            <input type="radio" name="rating" id="str2" value="2" />
-            <input type="radio" name="rating" id="str3" value="3" />
-            <input type="radio" name="rating" id="str4" value="4" />
-            <input type="radio" name="rating" id="str5" value="5" />
-          </div>
+          <Rating
+            icon="star"
+            onRate={this.handleRate}
+            name="rating"
+            defaultRating={this.state.rating}
+            maxRating={5}
+          />
           <textarea rows="3" name="reviewText" />
           <button className="ui button" type="submit">
             Submit

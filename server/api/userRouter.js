@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {User, Cart} = require('../db/models')
+const {User, Cart, Inventory, Product} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
@@ -23,12 +23,25 @@ router.put('/addToCart', async (req, res, next) => {
   try {
     const cartProduct = await Cart.findOrCreate({
       where: {
-        userId: 1,
-        inventoryId: 1
+        userId: req.body.userId,
+        inventoryId: req.body.inventoryId
       }
     })
-    await cartProduct[0].increment('quantity')
-    res.send(cartProduct[0])
+    await cartProduct[0].update({
+      quantity: req.body.quantity
+    })
+    const newCart = await Cart.findAll({
+      where: {
+        userId: req.body.userId
+      },
+      include: [
+        {
+          model: Inventory,
+          include: [{model: Product}]
+        }
+      ]
+    })
+    res.send(newCart)
   } catch (error) {
     next(error)
   }
@@ -40,7 +53,8 @@ router.put('/reduceFromCart', async (req, res, next) => {
       where: {
         userId: 1,
         inventoryId: 1
-      }
+      },
+      include: [{model: Inventory, include: [Product]}]
     })
     if (cartProduct.quantity > 1) {
       await cartProduct.decrement('quantity')

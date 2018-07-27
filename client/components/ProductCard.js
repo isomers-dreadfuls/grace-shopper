@@ -1,19 +1,29 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Card} from 'semantic-ui-react'
+import history from '../history'
 
 const ProductCard = props => {
   return (
     <React.Fragment>
-      <Link className="ui card" to={`/products/${props.product.id}`}>
-        <img src={props.product.image} className="ui image" />
-        <div className="content">
-          <div className="header">{props.product.name}</div>
-          <div className="meta">
-            <h3>${props.product.price}</h3>
-          </div>
-          <div className="description">{props.product.description}</div>
-        </div>
-      </Link>
+      <Card
+        onClick={() => {
+          history.push(`/products/${props.product.id}`)
+        }}
+        image={props.product.image}
+        header={props.product.name}
+        meta={`$${props.product.price}`}
+        description={props.product.description}
+        extra={
+          <button
+            type="submit"
+            onClick={event => {
+              event.stopPropagation()
+            }}
+          >
+            Add to Cart
+          </button>
+        }
+      />
     </React.Fragment>
   )
 }
