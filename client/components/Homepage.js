@@ -11,15 +11,20 @@ class Homepage extends React.Component {
   render() {
     const newProducts = this.props.newProducts
     return (
-      <React.Fragment>
-        <div>
-          <Link to="/products">Go To All Products</Link>
+      <React.Fragment id="home-page-container">
+        <div id="home-page-banner-container">
+          <img src="img/banner.png" alt="banner image" />
+          <Link to="/products" id="home-page-banner-button">
+            Shop All Sweaters
+          </Link>
         </div>
-        <h3>New Products</h3>
-        <div className="ui five cards">
-          {newProducts.map(product => {
-            return <ProductCard key={product.id} product={product} />
-          })}
+        <div id="home-page-new-products-container">
+          <h3>New Sweaters</h3>
+          <div id="home-page-new-products" className="ui five cards">
+            {newProducts.map(product => {
+              return <ProductCard key={product.id} product={product} />
+            })}
+          </div>
         </div>
       </React.Fragment>
     )
