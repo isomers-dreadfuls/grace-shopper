@@ -1,8 +1,10 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
+const {User, Product, Inventory, Review} = require('../server/db/models')
 const products = require('./products.json')
+const inventories = require('./inventories.json')
+const reviews = require('./reviews.json')
 
 /**
  * Welcome to the seed file! This seed file uses a newer language feature called...
@@ -51,8 +53,23 @@ async function seed() {
       const product = await Product.create(productData)
     })
   )
-
   console.log(`seeded ${products.length} products`)
+
+  console.log('seeding inventories')
+  await Promise.all(
+    inventories.map(async inventoryData => {
+      const inventory = await Inventory.create(inventoryData)
+    })
+  )
+  console.log(`seeded ${inventories.length} inventories`)
+
+  console.log('seeding reviews')
+  await Promise.all(
+    reviews.map(async reviewData => {
+      const review = await Review.create(reviewData)
+    })
+  )
+  console.log(`seeded ${reviews.length} reviews`)
 
   console.log(`seeded successfully`)
 }

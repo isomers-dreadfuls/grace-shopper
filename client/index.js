@@ -5,7 +5,7 @@ import {Router} from 'react-router-dom'
 import history from './history'
 import store from './store'
 import App from './app'
-import {StripeProvider} from 'react-stripe-elements'
+// import {StripeProvider} from 'react-stripe-elements'
 
 // establishes socket connection
 import './socket'
@@ -13,9 +13,9 @@ import './socket'
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
-      <StripeProvider apiKey="pk_test_PdTJvVNpt0qPtWbaasT8BAYN">
-        <App />
-      </StripeProvider>
+      {/* <StripeProvider apiKey="pk_test_PdTJvVNpt0qPtWbaasT8BAYN"> */}
+      <App />
+      {/* </StripeProvider> */}
     </Router>
   </Provider>,
   document.getElementById('app')
