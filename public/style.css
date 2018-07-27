@@ -16,11 +16,6 @@ a {
 }
 
 /* Home Page */
-#home-page-container {
-  display: flex;
-  flex-direction: column;
-}
-
 #home-page-banner-container {
   display: flex;
   flex-direction: column;
@@ -55,10 +50,6 @@ a {
 }
 
 /* Products Page */
-
-#all-products-page-container {
-  display: flex;
-}
 
 /* About Page */
 

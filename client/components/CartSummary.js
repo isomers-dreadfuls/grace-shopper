@@ -4,16 +4,37 @@ import {Link} from 'react-router-dom'
 const CartSummary = props => {
   function calculateSubtotal(cart) {
     let subtotal = 0
-    cart.map(cartItem => {
+    let discount = 0
+    let splitCart = []
+    cart.forEach(cartItem => {
       subtotal += cartItem.quantity * cartItem.inventory.product.price
+      for (let i = 0; i < cartItem.quantity; i++) {
+        splitCart.push(cartItem)
+      }
     })
-    return subtotal.toFixed(2)
+    splitCart.sort((a, b) => a.price > b.price)
+    let totalDiscountNum = Math.floor(splitCart.length / 4)
+    for (let i = 0; i < totalDiscountNum; i++) {
+      discount += +splitCart[i].inventory.product.price
+    }
+    return [subtotal.toFixed(2) - discount, discount.toFixed(2)]
   }
+  const subtotal = calculateSubtotal(props.cart)
 
   return (
     <React.Fragment>
       <h2>Cart Summary</h2>
-      <h3>Subtotal: ${calculateSubtotal(props.cart)}</h3>
+      {props.cart.map(cartItem => {
+        return (
+          <h4 key={cartItem.id}>
+            {cartItem.quantity} x {cartItem.inventory.product.name}({
+              cartItem.inventory.size
+            }): ${cartItem.inventory.product.price}
+          </h4>
+        )
+      })}
+      {subtotal[1] ? <h4>Discount: -${subtotal[1]}</h4> : null}
+      <h3>Subtotal: ${subtotal[0]}</h3>
       {/* <Link to={Checkout}>Checkout</Link> */}
     </React.Fragment>
   )

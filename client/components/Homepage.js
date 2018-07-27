@@ -11,7 +11,7 @@ class Homepage extends React.Component {
   render() {
     const newProducts = this.props.newProducts
     return (
-      <React.Fragment id="home-page-container">
+      <React.Fragment>
         <div id="home-page-banner-container">
           <img src="img/banner.png" alt="banner image" />
           <Link to="/products" id="home-page-banner-button">
