@@ -19,4 +19,12 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.post('/:id', async (req, res, next) => {
+  try {
+    const newUser = await User.create(req.body)
+  } catch (error) {
+    next(error);
+  }
+})
+
 module.exports = router
