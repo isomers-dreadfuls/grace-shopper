@@ -13,6 +13,7 @@ export {default as ReviewCard} from './ReviewCard'
 export {default as ReviewsList} from './ReviewsList'
 export {default as CartPage} from './CartPage'
 export {default as ProductRow} from './ProductRow'
-export {default as UserInfoPage} from "./UserInfoPage"
+export {default as UserInfoPage} from './UserInfoPage'
 export {default as CartSummary} from './CartSummary'
+export {default as AboutPage} from './AboutPage'
 export {Login, Signup} from './auth-form'
