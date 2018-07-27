@@ -13,7 +13,11 @@ async function seed() {
 
   // --- seed users
   console.log('.....seeding users')
-  await Promise.all(await User.bulkCreate(users))
+  await Promise.all(
+    users.map(async usersData => {
+      const users = await User.create(usersData)
+    })
+  )
   console.log(`-------> seeded ${users.length} users!`)
 
   // --- seed products
