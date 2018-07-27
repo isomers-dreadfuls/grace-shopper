@@ -30,60 +30,58 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
   ]
 
   return (
-    <div id="navbar-container">
-      <h1>Isomers</h1>
-      <nav>
-        {isLoggedIn ? (
-          <div>
-            {/* The navbar will show these links after you log in */}
-            <div className="ui menu">
-              <Link to="/" className="item">
-                Home
+    <nav>
+      {isLoggedIn ? (
+        <div id="navbar-container">
+          {/* The navbar will show these links after you log in */}
+          <div className="ui menu">
+            <h1 id="navbar-name">Isomers</h1>
+            <Link to="/" className="item">
+              Home
+            </Link>
+            <Link to="/products" className="item">
+              Products
+            </Link>
+            <Link to="/about-us" className="item">
+              About Us
+            </Link>
+            <div className="right menu">
+              <Link to="/cart" className="item">
+                Cart
               </Link>
-              <Link to="/products" className="item">
-                Products
-              </Link>
-              <Link to="/about-us" className="item">
-                About Us
-              </Link>
-              <div className="right menu">
-                <Link to="/cart" className="item">
-                  Cart
-                </Link>
-                <Dropdown text="My Account" options={options} simple item />
-              </div>
+              <Dropdown text="My Account" options={options} simple item />
             </div>
           </div>
-        ) : (
-          <div>
-            {/* The navbar will show these links before you log in */}
-            <div className="ui menu">
-              <Link to="/" className="item">
-                Home
+        </div>
+      ) : (
+        <div id="navbar-container">
+          {/* The navbar will show these links before you log in */}
+          <div className="ui menu">
+            <h1 id="navbar-name">Isomers</h1>
+            <Link to="/" className="item">
+              Home
+            </Link>
+            <Link to="/products" className="item">
+              Products
+            </Link>
+            <Link to="/about" className="item">
+              About
+            </Link>
+            <div className="right menu">
+              <Link to="/cart" className="item">
+                Cart
               </Link>
-              <Link to="/products" className="item">
-                Products
+              <Link to="/login" className="item">
+                Login
               </Link>
-              <Link to="/about" className="item">
-                About
+              <Link to="/sign-up" className="item">
+                Sign Up
               </Link>
-              <div className="right menu">
-                <Link to="/cart" className="item">
-                  Cart
-                </Link>
-                <Link to="/login" className="item">
-                  Login
-                </Link>
-                <Link to="/sign-up" className="item">
-                  Sign Up
-                </Link>
-              </div>
             </div>
           </div>
-        )}
-      </nav>
-      <hr />
-    </div>
+        </div>
+      )}
+    </nav>
   )
 }
 

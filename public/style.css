@@ -1,21 +1,80 @@
-body {
-  font-family: sans-serif;
+* {
+  font-family: 'Muli', sans-serif;
 }
 
 a {
   text-decoration: none;
+  color: #000;
 }
 
-label {
-  display: block;
+/* Navbar */
+
+#navbar-name {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0.5%;
 }
 
-nav a {
-  display: inline-block;
-  margin: 1em;
+/* Home Page */
+#home-page-container {
+  display: flex;
+  flex-direction: column;
 }
 
-form div {
-  margin: 1em;
-  display: inline-block;
+#home-page-banner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+  font-weight: 800;
+}
+#home-page-banner-container img {
+  width: 100%;
+  margin-bottom: 0.75%;
+}
+
+#home-page-banner-button {
+  margin: 0.75% 0;
+}
+
+#home-page-new-products-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 1% 0;
+}
+
+#home-page-new-products-container h3 {
+  font-weight: 800;
+  font-size: 24px;
+}
+
+#home-page-new-products {
+  display: flex;
+}
+
+/* Products Page */
+
+#all-products-page-container {
+  display: flex;
+}
+
+/* About Page */
+
+#about-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+}
+
+#about-page-container h1 {
+  font-weight: 800;
+  font-size: 30px;
+}
+
+#about-page-container p {
+  font-size: 24px;
+  font-weight: 400;
 }
