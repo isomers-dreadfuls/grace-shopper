@@ -13,16 +13,6 @@ const ProductCard = props => {
         header={props.product.name}
         meta={`$${props.product.price}`}
         description={props.product.description}
-        extra={
-          <button
-            type="submit"
-            onClick={event => {
-              event.stopPropagation()
-            }}
-          >
-            Add to Cart
-          </button>
-        }
       />
     </React.Fragment>
   )
