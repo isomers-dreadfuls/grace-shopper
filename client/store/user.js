@@ -1,13 +1,13 @@
 import axios from 'axios'
 import history from '../history'
-import { runInNewContext } from 'vm';
+import {runInNewContext} from 'vm'
+import {addToUserCart} from './cart'
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
-
 
 /**
  * INITIAL STATE
@@ -27,6 +27,7 @@ export const me = () => async dispatch => {
   try {
     const res = await axios.get('/auth/me')
     dispatch(getUser(res.data || defaultUser))
+    dispatch(addToUserCart({userId: res.data.id}))
   } catch (err) {
     console.error(err)
   }
@@ -42,7 +43,7 @@ export const auth = (email, password, method) => async dispatch => {
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    history.push('/')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -57,7 +58,6 @@ export const logout = () => async dispatch => {
     console.error(err)
   }
 }
-
 
 /**
  * REDUCER

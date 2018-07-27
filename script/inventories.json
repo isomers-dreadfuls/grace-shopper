@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "size": "Small",
+    "quantity": 1,
+    "productId": 1
+  },
+  {
+    "id": 2,
+    "size": "Medium",
+    "quantity": 5,
+    "productId": 1
+  },
+  {
+    "id": 3,
+    "size": "Large",
+    "quantity": 100,
+    "productId": 1
+  },
+  {
+    "id": 4,
+    "size": "Small",
+    "quantity": 10,
+    "productId": 2
+  },
+  {
+    "id": 5,
+    "size": "Medium",
+    "quantity": 10,
+    "productId": 2
+  },
+  {
+    "id": 6,
+    "size": "Large",
+    "quantity": 10,
+    "productId": 2
+  },
+  {
+    "id": 7,
+    "size": "Small",
+    "quantity": 10,
+    "productId": 3
+  },
+  {
+    "id": 8,
+    "size": "Medium",
+    "quantity": 10,
+    "productId": 3
+  },
+  {
+    "id": 9,
+    "size": "Large",
+    "quantity": 10,
+    "productId": 3
+  },
+  {
+    "id": 10,
+    "size": "Small",
+    "quantity": 10,
+    "productId": 4
+  },
+  {
+    "id": 11,
+    "size": "Medium",
+    "quantity": 10,
+    "productId": 4
+  },
+  {
+    "id": 12,
+    "size": "Large",
+    "quantity": 10,
+    "productId": 4
+  },
+  {
+    "id": 13,
+    "size": "Small",
+    "quantity": 10,
+    "productId": 5
+  },
+  {
+    "id": 14,
+    "size": "Medium",
+    "quantity": 10,
+    "productId": 5
+  },
+  {
+    "id": 15,
+    "size": "Large",
+    "quantity": 10,
+    "productId": 5
+  },
+  {
+    "id": 16,
+    "size": "Small",
+    "quantity": 10,
+    "productId": 6
+  },
+  {
+    "id": 17,
+    "size": "Medium",
+    "quantity": 10,
+    "productId": 6
+  },
+  {
+    "id": 18,
+    "size": "Large",
+    "quantity": 10,
+    "productId": 6
+  }
+]
