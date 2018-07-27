@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+document.cookie = 'cart=[]'
 const initialState = []
 
 const ADD_TO_CART = 'ADD_TO_CART'
