@@ -9,12 +9,12 @@ class Checkout extends React.Component {
   }
   componentDidMount() {
     if (window.Stripe) {
-      this.setState({stripe: window.Stripe('pk_test_PdTJvVNpt0qPtWbaasT8BAYN')})
+      this.setState({stripe: window.Stripe('pk_test_LwL4RUtinpP3PXzYirX2jNfR')})
     } else {
       document.querySelector('#stripe-js').addEventListener('load', () => {
         // Create Stripe instance once Stripe.js loads
         this.setState({
-          stripe: window.Stripe('pk_test_PdTJvVNpt0qPtWbaasT8BAYN')
+          stripe: window.Stripe('pk_test_LwL4RUtinpP3PXzYirX2jNfR')
         })
       })
     }
