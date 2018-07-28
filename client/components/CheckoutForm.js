@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import {injectStripe, CardElement} from 'react-stripe-elements'
 
 class CheckoutForm extends React.Component {
@@ -9,8 +10,10 @@ class CheckoutForm extends React.Component {
 
   async handleSubmit(event) {
     event.preventDefault()
-    const token = await this.props.stripe.createToken({name: 'Brian Kim'})
-    console.log('Received Stripe token:', token)
+    const {token} = await this.props.stripe.createToken({name: 'Brian Kim'})
+    console.log(token)
+    await axios.post('/api/stripe', {id: token.id})
+    console.log('Purchase Complete!')
   }
 
   render() {
@@ -21,7 +24,7 @@ class CheckoutForm extends React.Component {
             <h3>Card Details</h3>
             <CardElement />
           </label>
-          <button type="button">Confirm Order</button>
+          <button type="submit">Confirm Order</button>
         </form>
       </div>
     )
