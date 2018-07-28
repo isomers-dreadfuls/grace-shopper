@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAllProducts} from '../store/product'
-import {ProductCard} from './index'
+import {ProductCard, Sidebar} from './index'
+import {Grid} from 'semantic-ui-react'
 
 class AllProductsPage extends React.Component {
   async componentDidMount() {
@@ -10,11 +11,18 @@ class AllProductsPage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="ui four cards">
-          {this.props.allProducts.map(product => {
-            return <ProductCard key={product.id} product={product} />
-          })}
-        </div>
+        <Grid columns={2}>
+          <Grid.Column width={3}>
+            <Sidebar />
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <div className="ui four cards">
+              {this.props.allProducts.map(product => {
+                return <ProductCard key={product.id} product={product} />
+              })}
+            </div>
+          </Grid.Column>
+        </Grid>
       </React.Fragment>
     )
   }

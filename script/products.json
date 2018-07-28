@@ -2,37 +2,37 @@
   {
     "name": "Squirrel Sweater",
     "price": 19.99,
-    "image": "/img/product/default-sweater-square.png",
+    "image": "/img/product/squirrel-sweater.png",
     "description": "This ugly sweater features squirrel."
   },
   {
     "name": "Pirate Sweater",
     "price": 30,
-    "image": "/img/product/default-sweater-square.png",
+    "image": "/img/product/pirate-sweater.jpg",
     "description": "Pirate sweater description."
   },
   {
-    "name": "Blobfish Sweater",
+    "name": "Sloth Sweater",
     "price": 33.5,
-    "image": "/img/product/default-sweater-square.png",
-    "description": "Blobfish sweater description."
+    "image": "/img/product/sloth-sweater.jpg",
+    "description": "Sloth sweater description."
   },
   {
-    "name": "Mole Rat Sweater",
+    "name": "Cat Sweater",
     "price": 100,
-    "image": "/img/product/default-sweater-square.png",
-    "description": "Mole Rat sweater description."
+    "image": "/img/product/cat-sweater.jpg",
+    "description": "Cat sweater description."
   },
   {
-    "name": "Viperfish Sweater",
+    "name": "Gingerbread Sweater",
     "price": 45,
-    "image": "/img/product/default-sweater-square.png",
-    "description": "Viperfish sweater description."
+    "image": "/img/product/gingerbread-sweater.jpg",
+    "description": "Gingerbread sweater description."
   },
   {
-    "name": "Ugliest Sweater",
+    "name": "Bitcoin Sweater",
     "price": 20.25,
-    "image": "/img/product/default-sweater-square.png",
-    "description": "Ugliest description."
+    "image": "/img/product/bitcoin-sweater.jpg",
+    "description": "Bitcoin sweater description."
   }
 ]
