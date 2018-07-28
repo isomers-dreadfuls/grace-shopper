@@ -43,7 +43,7 @@ const CartSummary = props => {
         </h4>
       ) : null}
       <h3>Subtotal: ${subtotal[0]}</h3>
-      {/* <Link to={Checkout}>Checkout</Link> */}
+      <Link to="/checkout">Checkout</Link>
     </React.Fragment>
   )
 }
