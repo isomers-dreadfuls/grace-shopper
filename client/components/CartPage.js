@@ -15,10 +15,8 @@ class CartPage extends React.Component {
             ))}
           </Grid>
         </Grid.Column>
-        <Grid.Column width={3}>
-          <div id="cart-summary-container">
-            <CartSummary cart={this.props.cart} />
-          </div>
+        <Grid.Column width={3} id="cart-summary-container">
+          <CartSummary cart={this.props.cart} />
         </Grid.Column>
       </Grid>
     )
