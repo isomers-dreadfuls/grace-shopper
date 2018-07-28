@@ -17,7 +17,11 @@ const CartSummary = props => {
     for (let i = 0; i < totalDiscountNum; i++) {
       discount += +splitCart[i].inventory.product.price
     }
-    return [subtotal.toFixed(2) - discount, discount.toFixed(2)]
+    return [
+      (subtotal - discount).toFixed(2),
+      discount.toFixed(2),
+      totalDiscountNum
+    ]
   }
   const subtotal = calculateSubtotal(props.cart)
 
@@ -33,7 +37,11 @@ const CartSummary = props => {
           </h4>
         )
       })}
-      {subtotal[1] ? <h4>Discount: -${subtotal[1]}</h4> : null}
+      {subtotal[1] > 0 ? (
+        <h4>
+          {subtotal[2]} x Family Discount: -${subtotal[1]}
+        </h4>
+      ) : null}
       <h3>Subtotal: ${subtotal[0]}</h3>
       {/* <Link to={Checkout}>Checkout</Link> */}
     </React.Fragment>
