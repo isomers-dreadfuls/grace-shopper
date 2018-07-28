@@ -42,7 +42,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
             <Link to="/products" className="item">
               Products
             </Link>
-            <Link to="/about-us" className="item">
+            <Link to="/about" className="item">
               About Us
             </Link>
             <div className="right menu">
