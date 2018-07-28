@@ -22,17 +22,5 @@
     "userZip": 10010,
     "isAdmin": false,
     "password": "123"
-  },
-  {
-    "firstName": null,
-    "lastName": null,
-    "email": "steve@email.com",
-    "fullName": null,
-    "userAddress": null,
-    "userCity": null,
-    "userState": null,
-    "userZip": null,
-    "isAdmin": false,
-    "password": "123"
   }
 ]

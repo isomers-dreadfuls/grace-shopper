@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {ProductRow, CartSummary} from './index'
 import {Grid} from 'semantic-ui-react'
 
@@ -17,6 +18,7 @@ class CartPage extends React.Component {
         </Grid.Column>
         <Grid.Column width={3} id="cart-summary-container">
           <CartSummary cart={this.props.cart} />
+          <Link to="/checkout">Checkout</Link>
         </Grid.Column>
       </Grid>
     )
