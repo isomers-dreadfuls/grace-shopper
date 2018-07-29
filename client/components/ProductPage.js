@@ -3,17 +3,19 @@ import {connect} from 'react-redux'
 import {fetchProduct, getProduct} from '../store/product'
 import {ReviewsList} from './index'
 import {addToUserCart} from '../store/cart'
-import {Grid} from 'semantic-ui-react'
+import {Grid, Button} from 'semantic-ui-react'
 
 class ProductPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      quantity: NaN
+      quantity: NaN,
+      purchase: 'false'
     }
     this.addToCartButton = this.addToCartButton.bind(this)
     this.handleSizeChange = this.handleSizeChange.bind(this)
     this.sizeCheck = this.sizeCheck.bind(this)
+    this.buttonCheck = this.buttonCheck.bind(this)
   }
   componentDidMount() {
     this.props.fetchProduct()
@@ -22,12 +24,17 @@ class ProductPage extends React.Component {
     this.props.unMountProduct()
   }
   handleSizeChange(event) {
-    let newQuantity = this.props.inventories.filter(prod => {
-      return prod.id === +event.target.value
-    })[0].quantity
-    this.setState({
-      quantity: newQuantity
-    })
+    if (event.target.value !== '') {
+      let newQuantity = this.props.inventories.filter(prod => {
+        return prod.id === +event.target.value
+      })[0].quantity
+      this.setState({
+        quantity: newQuantity,
+        purchase: 'false'
+      })
+    } else {
+      this.setState({quantity: NaN})
+    }
   }
   sizeCheck() {
     switch (true) {
@@ -41,17 +48,45 @@ class ProductPage extends React.Component {
         return null
     }
   }
-  addToCartButton(event) {
+  buttonCheck() {
+    switch (true) {
+      case this.state.purchase === 'complete':
+        return <Button positive>Added!</Button>
+      case this.state.purchase === 'loading':
+        return (
+          <Button loading primary>
+            Loading
+          </Button>
+        )
+
+      default:
+        return (
+          <Button primary type="submit">
+            Add to Cart
+          </Button>
+        )
+    }
+  }
+  async addToCartButton(event) {
     event.preventDefault()
-    this.props.addToUserCart({
+    this.setState({purchase: 'loading'})
+    await this.props.addToUserCart({
       userId: this.props.user.id,
       inventoryId: event.target.sizeSelector.value,
       quantity: event.target.quantitySelector.value
     })
+    setTimeout(() => {
+      this.setState({purchase: 'complete'})
+    }, 500)
   }
   render() {
     const singleProduct = this.props.singleProduct
     const inventories = this.props.inventories
+    const maxQuantity = Math.min(this.state.quantity, 10)
+    const quantity = []
+    for (let i = 1; i <= maxQuantity; i++) {
+      quantity.push(i)
+    }
     return (
       <div id="product-page-container">
         <Grid columns={2}>
@@ -66,7 +101,9 @@ class ProductPage extends React.Component {
                 <h3>Size</h3>
                 {this.sizeCheck()}
                 <select name="sizeSelector" onChange={this.handleSizeChange}>
-                  <option value="" key={0} />
+                  <option value="" key={0}>
+                    Choose Size
+                  </option>
                   {inventories.map(item => {
                     return (
                       <option value={item.id} key={item.id}>
@@ -77,7 +114,7 @@ class ProductPage extends React.Component {
                 </select>
                 <h3>Quantity</h3>
                 <select name="quantitySelector">
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => {
+                  {quantity.map(num => {
                     return (
                       <option key={num} value={num}>
                         {num}
@@ -85,7 +122,7 @@ class ProductPage extends React.Component {
                     )
                   })}
                 </select>
-                <button type="submit">Add to Cart</button>
+                {this.buttonCheck()}
               </form>
               <h4>{singleProduct.description}</h4>
             </div>
