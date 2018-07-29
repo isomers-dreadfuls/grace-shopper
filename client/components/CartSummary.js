@@ -1,20 +1,27 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {calculateSubtotal} from '../store/cart'
 
 const CartSummary = props => {
-  function calculateSubtotal(cart) {
-    let subtotal = 0
-    cart.map(cartItem => {
-      subtotal += cartItem.quantity * cartItem.inventory.product.price
-    })
-    return subtotal.toFixed(2)
-  }
+  const subtotal = calculateSubtotal(props.cart)
 
   return (
     <React.Fragment>
       <h2>Cart Summary</h2>
-      <h3>Subtotal: ${calculateSubtotal(props.cart)}</h3>
-      {/* <Link to={Checkout}>Checkout</Link> */}
+      {props.cart.map(cartItem => {
+        return (
+          <h4 key={cartItem.id}>
+            {cartItem.quantity} x {cartItem.inventory.product.name}({
+              cartItem.inventory.size
+            }): ${cartItem.inventory.product.price}
+          </h4>
+        )
+      })}
+      {subtotal[1] > 0 ? (
+        <h4>
+          {subtotal[2]} x Family Discount: -${subtotal[1]}
+        </h4>
+      ) : null}
+      <h3>Subtotal: ${subtotal[0]}</h3>
     </React.Fragment>
   )
 }

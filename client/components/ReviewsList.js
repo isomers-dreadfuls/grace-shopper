@@ -21,9 +21,7 @@ class ReviewsList extends React.Component {
     this.props.addNewReview({
       rating: this.state.rating,
       reviewText: event.target.reviewText.value,
-      // NEED TO REVIEW
-      // temporary userId as 1 if no user is selected
-      userId: this.props.currentUser.id || 1,
+      userId: this.props.currentUser.id,
       productId: this.props.singleProduct.id
     })
   }
@@ -43,9 +41,15 @@ class ReviewsList extends React.Component {
             maxRating={5}
           />
           <textarea rows="3" name="reviewText" />
-          <button className="ui button" type="submit">
-            Submit
-          </button>
+          {this.props.currentUser.id ? (
+            <button className="ui button" type="submit">
+              Submit
+            </button>
+          ) : (
+            <button className="ui disabled button" type="submit">
+              Please Log In to Leave Reviews
+            </button>
+          )}
         </form>
       </React.Fragment>
     )

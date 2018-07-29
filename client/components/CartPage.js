@@ -1,20 +1,26 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {ProductRow, CartSummary} from './index'
+import {Grid} from 'semantic-ui-react'
 
 class CartPage extends React.Component {
   render() {
     return (
-      <div id="cart-page-container">
-        <div id="product-rows-container">
-          {this.props.cart.map(product => (
-            <ProductRow key={product.id} product={product} />
-          ))}
-        </div>
-        <div id="cart-summary-container">
+      <Grid columns={2} id="cart-page-container">
+        <Grid.Column width={12}>
+          <h2>Cart</h2>
+          <Grid columns={4}>
+            {this.props.cart.map(product => (
+              <ProductRow key={product.id} product={product} />
+            ))}
+          </Grid>
+        </Grid.Column>
+        <Grid.Column width={3} id="cart-summary-container">
           <CartSummary cart={this.props.cart} />
-        </div>
-      </div>
+          <Link to="/checkout">Checkout</Link>
+        </Grid.Column>
+      </Grid>
     )
   }
 }

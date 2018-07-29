@@ -1,55 +1,47 @@
 [
   {
-    "id": 1,
     "rating": 5,
     "reviewText": "This is the ugliest sweater I have ever seen!",
     "userId": 1,
     "productId": 1
   },
   {
-    "id": 2,
     "rating": 3,
     "reviewText": "This sweater is okay",
     "userId": 2,
     "productId": 2
   },
   {
-    "id": 3,
     "rating": 4,
     "reviewText": "This sweater is really nice",
     "userId": 1,
     "productId": 3
   },
   {
-    "id": 4,
     "rating": 4,
     "reviewText": "The quality is good",
     "userId": 2,
     "productId": 3
   },
   {
-    "id": 5,
     "rating": 3,
     "reviewText": "Average",
     "userId": 2,
     "productId": 4
   },
   {
-    "id": 6,
     "rating": 2,
     "reviewText": "Quality is really poor",
     "userId": 1,
     "productId": 5
   },
   {
-    "id": 7,
     "rating": 1,
     "reviewText": "Hate the design",
     "userId": 2,
     "productId": 5
   },
   {
-    "id": 8,
     "rating": 5,
     "reviewText": "I love this one!",
     "userId": 2,

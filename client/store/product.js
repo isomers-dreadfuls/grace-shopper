@@ -8,12 +8,12 @@ const initialState = {
   singleProduct: {}
 }
 
-const getProduct = product => ({
+export const getProduct = product => ({
   type: GET_PRODUCT,
   product
 })
 
-const getAllProducts = allProducts => ({
+export const getAllProducts = allProducts => ({
   type: GET_ALL_PRODUCTS,
   allProducts
 })

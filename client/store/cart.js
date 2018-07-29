@@ -27,9 +27,36 @@ export const deleteFromUserCart = ids => async dispatch => {
   dispatch(addToCart(newCart))
 }
 
-// export const removeFromUserCart = product => async dispatch => {
-//   dispatch(removeFromCart(product))
-// }
+export const calculateSubtotal = cart => {
+  let subtotal = 0
+  let discount = 0
+  let splitCart = []
+  cart.forEach(cartItem => {
+    subtotal += cartItem.quantity * cartItem.inventory.product.price
+    for (let i = 0; i < cartItem.quantity; i++) {
+      splitCart.push(cartItem)
+    }
+  })
+  splitCart.sort((a, b) => a.price > b.price)
+  let totalDiscountNum = Math.floor(splitCart.length / 4)
+  for (let i = 0; i < totalDiscountNum; i++) {
+    discount += +splitCart[i].inventory.product.price
+  }
+  return [
+    (subtotal - discount).toFixed(2),
+    discount.toFixed(2),
+    totalDiscountNum
+  ]
+}
+
+export const checkout = info => async dispatch => {
+  await axios.post('/api/stripe', {
+    amount: calculateSubtotal(info.cart)[0],
+    id: info.id,
+    userId: info.userId
+  })
+  dispatch(addToCart([]))
+}
 
 export default function(state = initialState, action) {
   switch (action.type) {
