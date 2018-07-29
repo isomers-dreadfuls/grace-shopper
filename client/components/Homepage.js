@@ -1,12 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {fetchAllProducts} from '../store/product'
+import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
 
 class Homepage extends React.Component {
   async componentDidMount() {
     await this.props.fetchAllProducts()
+  }
+  componentWillUnmount() {
+    this.props.clearProducts()
   }
   render() {
     const newProducts = this.props.newProducts
@@ -43,6 +46,9 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchAllProducts: () => {
       dispatch(fetchAllProducts())
+    },
+    clearProducts: () => {
+      dispatch(getAllProducts([]))
     }
   }
 }

@@ -14,12 +14,4 @@ const ReviewCard = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
 export default ReviewCard
