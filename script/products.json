@@ -34,5 +34,53 @@
     "price": 20.25,
     "image": "/img/product/bitcoin-sweater.jpg",
     "description": "Bitcoin sweater description."
+  },
+  {
+    "name": "Drinking Sweater",
+    "price": 39.99,
+    "image": "/img/product/drinking-sweater.jpg",
+    "description": "Drinking sweater description."
+  },
+  {
+    "name": "Fireplace Sweater",
+    "price": 39.99,
+    "image": "/img/product/fireplace-sweater.jpg",
+    "description": "Fireplace sweater description."
+  },
+  {
+    "name": "Jesus Sweater",
+    "price": 39.99,
+    "image": "/img/product/jesus-sweater.jpg",
+    "description": "Jesus sweater description."
+  },
+  {
+    "name": "Llama Sweater",
+    "price": 39.99,
+    "image": "/img/product/llama-sweater.jpg",
+    "description": "Llama sweater description."
+  },
+  {
+    "name": "Dinosaur Sweater",
+    "price": 39.99,
+    "image": "/img/product/dinosaur-sweater.jpg",
+    "description": "Dinosaur sweater description."
+  },
+  {
+    "name": "Car Sweater",
+    "price": 39.99,
+    "image": "/img/product/car-sweater.jpg",
+    "description": "Car sweater description."
+  },
+  {
+    "name": "Rick and Morty Sweater",
+    "price": 0.01,
+    "image": "/img/product/rick-and-morty-sweater.jpg",
+    "description": "Rick and Morty sweater description."
+  },
+  {
+    "name": "Elf Sweater",
+    "price": 50.0,
+    "image": "/img/product/elf-sweater.jpg",
+    "description": "Elf sweater description."
   }
 ]

@@ -7,7 +7,7 @@ class Sidebar extends React.Component {
     super()
     this.state = {
       activeIndex: 0,
-      rating: 4
+      rating: 1
     }
   }
   handleClick = (e, titleProps) => {
@@ -30,9 +30,24 @@ class Sidebar extends React.Component {
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 1}>
           <Form.Group grouped>
-            <Form.Field label="Small" control="input" type="checkbox" />
-            <Form.Field label="Medium" control="input" type="checkbox" />
-            <Form.Field label="Large" control="input" type="checkbox" />
+            <Form.Field
+              label="Small"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
+            <Form.Field
+              label="Medium"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
+            <Form.Field
+              label="Large"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
           </Form.Group>
         </Accordion.Content>
 
@@ -46,10 +61,30 @@ class Sidebar extends React.Component {
         </Accordion.Title>
         <Accordion.Content active={this.state.activeIndex === 2}>
           <Form.Group grouped>
-            <Form.Field label="$0 - $15" control="input" type="checkbox" />
-            <Form.Field label="$15 - $25" control="input" type="checkbox" />
-            <Form.Field label="$25 - $50" control="input" type="checkbox" />
-            <Form.Field label="$50 - $100" control="input" type="checkbox" />
+            <Form.Field
+              label="$0 - $15"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
+            <Form.Field
+              label="$15 - $25"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
+            <Form.Field
+              label="$25 - $50"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
+            <Form.Field
+              label="$50 - $100"
+              control="input"
+              type="checkbox"
+              defaultChecked
+            />
           </Form.Group>
         </Accordion.Content>
 
