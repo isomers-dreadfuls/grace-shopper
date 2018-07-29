@@ -3,14 +3,14 @@ import {connect} from 'react-redux'
 import {fetchProduct, getProduct} from '../store/product'
 import {ReviewsList} from './index'
 import {addToUserCart} from '../store/cart'
-import {Grid, Button} from 'semantic-ui-react'
+import {Grid, Button, Tab} from 'semantic-ui-react'
 
 class ProductPage extends React.Component {
   constructor() {
     super()
     this.state = {
       quantity: NaN,
-      purchase: 'false'
+      purchase: 'disabled'
     }
     this.addToCartButton = this.addToCartButton.bind(this)
     this.handleSizeChange = this.handleSizeChange.bind(this)
@@ -33,7 +33,7 @@ class ProductPage extends React.Component {
         purchase: 'false'
       })
     } else {
-      this.setState({quantity: NaN})
+      this.setState({quantity: NaN, purchase: 'disabled'})
     }
   }
   sizeCheck() {
@@ -51,17 +51,27 @@ class ProductPage extends React.Component {
   buttonCheck() {
     switch (true) {
       case this.state.purchase === 'complete':
-        return <Button positive>Added!</Button>
+        return (
+          <Button style={{width: '80%'}} positive>
+            Added!
+          </Button>
+        )
+      case this.state.purchase === 'disabled':
+        return (
+          <Button disabled style={{width: '80%'}} primary>
+            Add to Cart
+          </Button>
+        )
       case this.state.purchase === 'loading':
         return (
-          <Button loading primary>
+          <Button style={{width: '80%'}} loading primary>
             Loading
           </Button>
         )
 
       default:
         return (
-          <Button primary type="submit">
+          <Button style={{width: '80%'}} primary type="submit">
             Add to Cart
           </Button>
         )
@@ -87,6 +97,38 @@ class ProductPage extends React.Component {
     for (let i = 1; i <= maxQuantity; i++) {
       quantity.push(i)
     }
+    const panes = [
+      {
+        menuItem: 'Description',
+        render: () => <Tab.Pane>{singleProduct.description}</Tab.Pane>
+      },
+      {
+        menuItem: 'Sizing',
+        render: () => (
+          <Tab.Pane>
+            If you are small, order a small.
+            <br />
+            If you are medium, order a medium.
+            <br />
+            If you are large, order a large.
+            <br />
+            If you are unsure, order all three.
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: 'Return Policy',
+        render: () => (
+          <Tab.Pane>
+            If you are unhappy with your sweater purchase, you are out of luck.
+            <br />
+            At this time, we will not give refunds for any of our products.
+            <br />
+            All sales are final.
+          </Tab.Pane>
+        )
+      }
+    ]
     return (
       <div id="product-page-container">
         <Grid columns={2}>
@@ -100,7 +142,11 @@ class ProductPage extends React.Component {
               <form onSubmit={this.addToCartButton}>
                 <h3>Size</h3>
                 {this.sizeCheck()}
-                <select name="sizeSelector" onChange={this.handleSizeChange}>
+                <select
+                  style={{width: '80%'}}
+                  name="sizeSelector"
+                  onChange={this.handleSizeChange}
+                >
                   <option value="" key={0}>
                     Choose Size
                   </option>
@@ -113,7 +159,7 @@ class ProductPage extends React.Component {
                   })}
                 </select>
                 <h3>Quantity</h3>
-                <select name="quantitySelector">
+                <select style={{width: '40%'}} name="quantitySelector">
                   {quantity.map(num => {
                     return (
                       <option key={num} value={num}>
@@ -124,7 +170,11 @@ class ProductPage extends React.Component {
                 </select>
                 {this.buttonCheck()}
               </form>
-              <h4>{singleProduct.description}</h4>
+              <Tab
+                menu={{secondary: true, pointing: true}}
+                style={{width: '80%'}}
+                panes={panes}
+              />
             </div>
           </Grid.Column>
         </Grid>
