@@ -5,6 +5,16 @@ import {ProductCard, Sidebar} from './index'
 import {Grid} from 'semantic-ui-react'
 
 class AllProductsPage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      rating: 1
+    }
+    this.onRate = this.onRate.bind(this)
+  }
+  onRate(event, {rating}) {
+    this.setState({rating})
+  }
   async componentDidMount() {
     await this.props.fetchAllProducts()
   }
@@ -16,7 +26,7 @@ class AllProductsPage extends React.Component {
       <React.Fragment>
         <Grid columns={2}>
           <Grid.Column width={3}>
-            <Sidebar />
+            <Sidebar onRate={this.onRate} />
           </Grid.Column>
           <Grid.Column width={12}>
             <div className="ui four cards">

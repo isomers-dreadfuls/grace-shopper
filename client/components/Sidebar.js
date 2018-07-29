@@ -1,16 +1,14 @@
 import React from 'react'
-import {connect} from 'react-redux'
 import {Accordion, Icon, Rating, Form} from 'semantic-ui-react'
 
 class Sidebar extends React.Component {
   constructor() {
     super()
     this.state = {
-      activeIndex: 0,
-      rating: 1
+      activeIndex: 0
     }
   }
-  handleClick = (e, titleProps) => {
+  handleClick = (event, titleProps) => {
     const {index} = titleProps
     const {activeIndex} = this.state
     const newIndex = activeIndex === index ? -1 : index
@@ -100,9 +98,7 @@ class Sidebar extends React.Component {
           <p>Minimum Rating</p>
           <Rating
             icon="star"
-            onRate={(event, {rating}) => {
-              this.setState({rating})
-            }}
+            onRate={this.props.onRate}
             name="rating"
             defaultRating={this.state.rating}
             maxRating={5}
@@ -113,12 +109,4 @@ class Sidebar extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {}
-}
-
-const mapDispatchToProps = dispatch => {
-  return {}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sidebar)
+export default Sidebar
