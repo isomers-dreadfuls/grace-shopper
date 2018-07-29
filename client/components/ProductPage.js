@@ -1,31 +1,40 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {fetchProduct} from '../store/product'
+import {fetchProduct, getProduct} from '../store/product'
 import {ReviewsList} from './index'
 import {addToUserCart} from '../store/cart'
+import {Grid, Button, Tab} from 'semantic-ui-react'
 
 class ProductPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      quantity: 100
+      quantity: NaN,
+      purchase: 'disabled'
     }
     this.addToCartButton = this.addToCartButton.bind(this)
     this.handleSizeChange = this.handleSizeChange.bind(this)
     this.sizeCheck = this.sizeCheck.bind(this)
+    this.buttonCheck = this.buttonCheck.bind(this)
   }
   componentDidMount() {
     this.props.fetchProduct()
   }
+  componentWillUnmount() {
+    this.props.unMountProduct()
+  }
   handleSizeChange(event) {
-    let newQuantity = this.props.inventories.filter(prod => {
-      return prod.id === +event.target.value
-    })[0].quantity
-    console.log(newQuantity)
-    this.setState({
-      quantity: newQuantity
-    })
+    if (event.target.value !== '') {
+      let newQuantity = this.props.inventories.filter(prod => {
+        return prod.id === +event.target.value
+      })[0].quantity
+      this.setState({
+        quantity: newQuantity,
+        purchase: 'false'
+      })
+    } else {
+      this.setState({quantity: NaN, purchase: 'disabled'})
+    }
   }
   sizeCheck() {
     switch (true) {
@@ -39,50 +48,136 @@ class ProductPage extends React.Component {
         return null
     }
   }
-  addToCartButton(event) {
+  buttonCheck() {
+    switch (true) {
+      case this.state.purchase === 'complete':
+        return (
+          <Button style={{width: '80%'}} positive>
+            Added!
+          </Button>
+        )
+      case this.state.purchase === 'disabled':
+        return (
+          <Button disabled style={{width: '80%'}} primary>
+            Add to Cart
+          </Button>
+        )
+      case this.state.purchase === 'loading':
+        return (
+          <Button style={{width: '80%'}} loading primary>
+            Loading
+          </Button>
+        )
+
+      default:
+        return (
+          <Button style={{width: '80%'}} primary type="submit">
+            Add to Cart
+          </Button>
+        )
+    }
+  }
+  async addToCartButton(event) {
     event.preventDefault()
-    this.props.addToUserCart({
+    this.setState({purchase: 'loading'})
+    await this.props.addToUserCart({
       userId: this.props.user.id,
       inventoryId: event.target.sizeSelector.value,
       quantity: event.target.quantitySelector.value
     })
+    setTimeout(() => {
+      this.setState({purchase: 'complete'})
+    }, 500)
   }
   render() {
     const singleProduct = this.props.singleProduct
     const inventories = this.props.inventories
+    const maxQuantity = Math.min(this.state.quantity, 10)
+    const quantity = []
+    for (let i = 1; i <= maxQuantity; i++) {
+      quantity.push(i)
+    }
+    const panes = [
+      {
+        menuItem: 'Description',
+        render: () => <Tab.Pane>{singleProduct.description}</Tab.Pane>
+      },
+      {
+        menuItem: 'Sizing',
+        render: () => (
+          <Tab.Pane>
+            If you are small, order a small.
+            <br />
+            If you are medium, order a medium.
+            <br />
+            If you are large, order a large.
+            <br />
+            If you are unsure, order all three.
+          </Tab.Pane>
+        )
+      },
+      {
+        menuItem: 'Return Policy',
+        render: () => (
+          <Tab.Pane>
+            If you are unhappy with your sweater purchase, you are out of luck.
+            <br />
+            At this time, we will not give refunds for any of our products.
+            <br />
+            All sales are final.
+          </Tab.Pane>
+        )
+      }
+    ]
     return (
       <div id="product-page-container">
-        <img src={singleProduct.image} />
-        <div id="product-page-info">
-          <h2>{singleProduct.name}</h2>
-          <h3>${singleProduct.price}</h3>
-          <form onSubmit={this.addToCartButton}>
-            <h3>Size</h3>
-            {this.sizeCheck()}
-            <select name="sizeSelector" onChange={this.handleSizeChange}>
-              <option value="" key={0} />
-              {inventories.map(item => {
-                return (
-                  <option value={item.id} key={item.id}>
-                    {item.size}
+        <Grid columns={2}>
+          <Grid.Column>
+            <img style={{height: '500px'}} src={singleProduct.image} />
+          </Grid.Column>
+          <Grid.Column>
+            <div id="product-page-info">
+              <h2>{singleProduct.name}</h2>
+              <h3>${singleProduct.price}</h3>
+              <form onSubmit={this.addToCartButton}>
+                <h3>Size</h3>
+                {this.sizeCheck()}
+                <select
+                  style={{width: '80%'}}
+                  name="sizeSelector"
+                  onChange={this.handleSizeChange}
+                >
+                  <option value="" key={0}>
+                    Choose Size
                   </option>
-                )
-              })}
-            </select>
-            <h3>Quantity</h3>
-            <select name="quantitySelector">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(num => {
-                return (
-                  <option key={num} value={num}>
-                    {num}
-                  </option>
-                )
-              })}
-            </select>
-            <button type="submit">Add to Cart</button>
-          </form>
-          <h4>{singleProduct.description}</h4>
-        </div>
+                  {inventories.map(item => {
+                    return (
+                      <option value={item.id} key={item.id}>
+                        {item.size}
+                      </option>
+                    )
+                  })}
+                </select>
+                <h3>Quantity</h3>
+                <select style={{width: '40%'}} name="quantitySelector">
+                  {quantity.map(num => {
+                    return (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    )
+                  })}
+                </select>
+                {this.buttonCheck()}
+              </form>
+              <Tab
+                menu={{secondary: true, pointing: true}}
+                style={{width: '80%'}}
+                panes={panes}
+              />
+            </div>
+          </Grid.Column>
+        </Grid>
         <ReviewsList />
       </div>
     )
@@ -101,6 +196,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     fetchProduct: () => {
       dispatch(fetchProduct(ownProps.match.params.productId))
+    },
+    unMountProduct: () => {
+      dispatch(getProduct({}))
     },
     addToUserCart: ids => {
       dispatch(addToUserCart(ids))

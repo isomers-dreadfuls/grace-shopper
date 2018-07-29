@@ -10,7 +10,9 @@ const ProductCard = props => {
           history.push(`/products/${props.product.id}`)
         }}
       >
-        <Image src={props.product.image} size="medium" />
+        <div style={{overflow: 'hidden', height: '20vw'}}>
+          <Image src={props.product.image} size="medium" />
+        </div>
         <Card.Content>
           <Card.Header>{props.product.name}</Card.Header>
           <Card.Meta>{`$${props.product.price}`}</Card.Meta>

@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Dropdown, Menu} from 'semantic-ui-react'
+import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
 
-const Navbar = ({handleClick, isLoggedIn, user}) => {
+const Navbar = props => {
+  const {handleClick, isLoggedIn, user} = props
   const options = [
     {
       key: 1,
@@ -31,56 +32,61 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
 
   return (
     <nav>
-      {isLoggedIn ? (
-        <div id="navbar-container">
-          {/* The navbar will show these links after you log in */}
-          <div className="ui menu">
-            <h1 id="navbar-name">Isomers</h1>
-            <Link to="/" className="item">
-              Home
-            </Link>
-            <Link to="/products" className="item">
-              Products
-            </Link>
-            <Link to="/about" className="item">
-              About Us
-            </Link>
-            <div className="right menu">
-              <Link to="/cart" className="item">
-                Cart
-              </Link>
+      <div id="navbar-container">
+        <div className="ui menu">
+          <h1 id="navbar-name">Isomers</h1>
+          <Menu.Item
+            onClick={() => {
+              history.push('/')
+            }}
+          >
+            Home
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              history.push('/products')
+            }}
+          >
+            Products
+          </Menu.Item>
+          <Menu.Item
+            onClick={() => {
+              history.push('/about')
+            }}
+          >
+            About Us
+          </Menu.Item>
+          <div className="right menu">
+            <Menu.Item
+              onClick={() => {
+                history.push('/cart')
+              }}
+            >
+              Cart<Label>{props.cart.length}</Label>
+            </Menu.Item>
+            {isLoggedIn ? (
               <Dropdown text="My Account" options={options} simple item />
-            </div>
+            ) : (
+              <React.Fragment>
+                <Menu.Item
+                  onClick={() => {
+                    history.push('/login')
+                  }}
+                >
+                  Login
+                </Menu.Item>
+                <Menu.Item
+                  onClick={() => {
+                    history.push('/sign-up')
+                  }}
+                >
+                  Signup
+                </Menu.Item>
+              </React.Fragment>
+            )}
           </div>
         </div>
-      ) : (
-        <div id="navbar-container">
-          {/* The navbar will show these links before you log in */}
-          <div className="ui menu">
-            <h1 id="navbar-name">Isomers</h1>
-            <Link to="/" className="item">
-              Home
-            </Link>
-            <Link to="/products" className="item">
-              Products
-            </Link>
-            <Link to="/about" className="item">
-              About
-            </Link>
-            <div className="right menu">
-              <Link to="/cart" className="item">
-                Cart
-              </Link>
-              <Link to="/login" className="item">
-                Login
-              </Link>
-              <Link to="/sign-up" className="item">
-                Sign Up
-              </Link>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </nav>
   )
 }
@@ -92,7 +98,8 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     user: state.user,
-    state: state
+    state: state,
+    cart: state.cart
   }
 }
 

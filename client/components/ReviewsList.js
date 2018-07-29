@@ -28,10 +28,11 @@ class ReviewsList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h3>Leave a Review:</h3>
+        <h3>Reviews:</h3>
         {this.props.allReviews.map(review => {
           return <ReviewCard key={review.id} review={review} />
         })}
+        <h3>Leave a Review:</h3>
         <form className="ui form" onSubmit={this.handleSubmit}>
           <Rating
             icon="star"
