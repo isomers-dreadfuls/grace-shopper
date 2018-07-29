@@ -21,8 +21,6 @@ class ReviewsList extends React.Component {
     this.props.addNewReview({
       rating: this.state.rating,
       reviewText: event.target.reviewText.value,
-      // NEED TO REVIEW
-      // temporary userId as 1 if no user is selected
       userId: this.props.currentUser.id,
       productId: this.props.singleProduct.id
     })
