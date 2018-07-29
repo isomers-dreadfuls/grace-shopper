@@ -32,6 +32,14 @@ router.put('/add', async (req, res, next) => {
       await cartProduct[0].increment('quantity', {
         by: req.body.quantity
       })
+
+      //this is very temporary, to be reviewed by team for full implementation
+      //set cart cookie
+      res.cookie(
+        'cart',
+        `s=${req.session.id}&i=${req.body.inventoryId}&q=${req.body.quantity}`,
+        {path: '/'}
+      )
     }
     const newCart = await cartFromDb(req.body.userId)
     res.send(newCart)

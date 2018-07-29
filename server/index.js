@@ -54,10 +54,10 @@ const createApp = () => {
   // session middleware with passport
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      secret: process.env.SESSION_SECRET || 'isomers ugly sweaters',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: true //Forces a session that is "uninitialized" to be saved to the store.
     })
   )
   app.use(passport.initialize())
