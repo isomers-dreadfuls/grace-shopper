@@ -57,7 +57,7 @@ const createApp = () => {
       secret: process.env.SESSION_SECRET || 'my best friend is Cody',
       store: sessionStore,
       resave: false,
-      saveUninitialized: false
+      saveUninitialized: true
     })
   )
   app.use(passport.initialize())
@@ -66,6 +66,22 @@ const createApp = () => {
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
+
+  app.use(cookieParser())
+  app.use(function(req, res, next) {
+    // check if client sent cookie
+    console.log('session id is: , ', req.session.id)
+    var cookie = req.cookies.cart
+    if (cookie === undefined) {
+      // no: set a new cookie
+      res.cookie('cart', '', {maxAge: 900000, httpOnly: true})
+      // console.log('cookie created successfully')
+    } else {
+      // yes, cookie was already present
+      // console.log('cookie exists', cookie)
+    }
+    next()
+  })
 
   // static file-serving middleware
   app.use(express.static(path.join(__dirname, '..', 'public')))
