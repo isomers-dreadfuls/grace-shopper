@@ -1,6 +1,6 @@
 const router = require('express').Router()
 const stripe = require('stripe')('sk_test_TwTTlid3GeOG6YPydOjARw4I')
-const {Inventory, Cart, Order} = require('../db/models')
+const {Inventory, Cart, Order, OrderInventory} = require('../db/models')
 module.exports = router
 
 router.post('/', async (req, res, next) => {
@@ -19,19 +19,21 @@ router.post('/', async (req, res, next) => {
       throw new Error('Inventory not enough')
     }
     // if there is enough inventory, then create a new stripe charge
+    // console.log('sending stripe:  ', Number(req.body.amount * 100))
     await stripe.charges.create({
-      amount: 100 * parseInt(req.body.amount, 10),
+      amount: Number(req.body.amount) * 100,
       currency: 'usd',
       description: 'An example charge',
       source: req.body.id
     })
     // if no errors so far, then create a new order instance in the database for this order
+    // console.log('creating order: ', Number(req.body.amount * 10))
     let newOrder = await Order.create({
       shippingAddress: 'test',
       shippingCity: 'test',
       shippingState: 'test',
       shippingZip: 11111,
-      price: parseInt(req.body.amount, 10),
+      price: Number(req.body.amount) * 10,
       userId: req.body.userId,
       orderStatus: 'placed'
     })
@@ -47,9 +49,12 @@ router.post('/', async (req, res, next) => {
         by: quantity
       })
       // add inventory to the order_inventory join table
-      for (let i = 0; i < quantity; i++) {
-        await newOrder.addInventories(item)
+      const orderInventory = {
+        quantity: quantity,
+        orderId: newOrder.id,
+        inventoryId: item.id
       }
+      await OrderInventory.create(orderInventory)
     })
     // finally, destroy the cart for the user. For guests, the cookies 'cart' is set to an empty object
     await Cart.destroy({
