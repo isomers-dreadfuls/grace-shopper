@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {Dropdown, Menu, Label, Search} from 'semantic-ui-react'
 import history from '../history'
@@ -54,7 +53,7 @@ const Navbar = props => {
               history.push('/products')
             }}
           >
-            Products
+            Sweaters
           </Menu.Item>
           <Menu.Item
             onClick={() => {
