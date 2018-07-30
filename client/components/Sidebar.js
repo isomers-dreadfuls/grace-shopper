@@ -33,19 +33,25 @@ class Sidebar extends React.Component {
                 label="Small"
                 control="input"
                 type="checkbox"
-                defaultChecked
+                value={0}
+                onChange={this.props.sizeSelect}
+                checked={this.props.sizeRange[0]}
               />
               <Form.Field
                 label="Medium"
                 control="input"
                 type="checkbox"
-                defaultChecked
+                value={1}
+                onChange={this.props.sizeSelect}
+                checked={this.props.sizeRange[1]}
               />
               <Form.Field
                 label="Large"
                 control="input"
                 type="checkbox"
-                defaultChecked
+                value={2}
+                onChange={this.props.sizeSelect}
+                checked={this.props.sizeRange[2]}
               />
             </Form.Group>
           </Accordion.Content>
@@ -104,7 +110,6 @@ class Sidebar extends React.Component {
             Rating
           </Accordion.Title>
           <Accordion.Content active={this.state.activeIndex === 3}>
-            <p>Minimum Rating</p>
             <Rating
               icon="star"
               onRate={this.props.onRate}
