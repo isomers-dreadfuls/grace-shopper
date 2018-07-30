@@ -8,7 +8,7 @@ const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 const initialState = {
   allProducts: [],
   singleProduct: {},
-  search: ""
+  search: ''
 }
 
 // this route is for setting a single product to the store
@@ -26,13 +26,6 @@ export const getAllProducts = allProducts => ({
 export const setSearch = searchString => ({
   type: SET_SEARCH,
   searchString
-})
-
-
-
-export const searchResult = searchResults => ({
-  type: SEARCH_PRODUCT,
-  searchResults
 })
 
 // this route is for retrieving one product from the database using the product id
@@ -66,7 +59,7 @@ export const searchProducts = searchKey => async dispatch => {
     }
   })
   dispatch(setSearch(searchKey))
-  dispatch(searchResult(returnArray))
+  dispatch(getAllProducts(returnArray))
 }
 
 // this route is for adding a review to a specific product
@@ -98,12 +91,8 @@ export default function(state = initialState, action) {
       }
     case SET_SEARCH:
       return {
-        ...state, search: action.searchString
-      }
-    case SEARCH_PRODUCT:
-      return {
         ...state,
-        allProducts: action.searchResults
+        search: action.searchString
       }
     default:
       return state
