@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {logout} from '../store'
 import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
@@ -13,7 +12,7 @@ const Navbar = props => {
       key: 1,
       text: 'View My Account',
       onClick: () => {
-        history.push(`/user/${user.id}`)
+        history.push(`/users/${user.id}`)
       }
     },
     {
@@ -47,7 +46,7 @@ const Navbar = props => {
               history.push('/products')
             }}
           >
-            Products
+            Sweaters
           </Menu.Item>
           <Menu.Item
             onClick={() => {
