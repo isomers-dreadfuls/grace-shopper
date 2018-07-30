@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchAllProducts, getAllProducts} from '../store/product'
+import {fetchAllProducts, getAllProducts, searchProducts} from '../store/product'
 import {ProductCard, Sidebar} from './index'
 import {Grid} from 'semantic-ui-react'
 
@@ -32,10 +32,18 @@ class AllProductsPage extends React.Component {
     newState[event.target.value] = 1 - newState[event.target.value]
     this.setState({sizeRange: newState})
   }
+
+  //Mounting Hooks
+  componentWillMount() {
+    this.props.clearProducts()
+  }
   async componentDidMount() {
-
-    await this.props.fetchAllProducts()
-
+    if(this.props.search){ 
+      await this.props.searchResult(this.props.search)
+    }
+    else{
+      await this.props.fetchAllProducts()
+    }
   }
   componentWillUnmount() {
     this.props.clearProducts()
@@ -99,6 +107,7 @@ class AllProductsPage extends React.Component {
               sizeRange={this.state.sizeRange}
             />
           </Grid.Column>
+          {(this.props.search)?(<h3>Showing {this.props.allProducts.length} related to "{this.props.search}"</h3>):(<h3>All Products</h3>)}
           <Grid.Column width={12}>
             <div className="ui four cards">
               {productsList.map(product => {
@@ -115,7 +124,7 @@ class AllProductsPage extends React.Component {
 const mapStateToProps = state => {
   return {
     allProducts: state.product.allProducts || [],
-    search: state.product.search
+    search: state.product.search,
   }
 }
 
@@ -126,6 +135,9 @@ const mapDispatchToProps = dispatch => {
     },
     clearProducts: () => {
       dispatch(getAllProducts([]))
+    },
+    searchResult: (searchKey) => {
+      dispatch(searchProducts(searchKey))
     }
   }
 }

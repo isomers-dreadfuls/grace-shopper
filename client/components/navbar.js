@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../store'
-import {Dropdown, Menu, Label, Search} from 'semantic-ui-react'
+import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
 import {searchProducts} from '../store/product'
 
@@ -50,6 +50,7 @@ const Navbar = props => {
           </Menu.Item>
           <Menu.Item
             onClick={() => {
+              props.search()
               history.push('/products')
             }}
           >
@@ -57,6 +58,7 @@ const Navbar = props => {
           </Menu.Item>
           <Menu.Item
             onClick={() => {
+              
               history.push('/about')
             }}
           >
@@ -124,7 +126,7 @@ const mapDispatch = dispatch => {
     },
     search: (searchKey) => {
       dispatch(searchProducts(searchKey))
-    }
+    },
   }
 }
 
