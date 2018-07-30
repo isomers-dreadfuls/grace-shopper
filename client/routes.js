@@ -9,6 +9,7 @@ import {
   Checkout,
   Homepage,
   Login,
+  OrdersPage,
   ProductPage,
   Signup,
   UserHome,
@@ -35,6 +36,7 @@ class Routes extends Component {
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/" component={Homepage} />
         <Route path="/login" component={Login} />
+        <Route path="/orders/:id" component={OrdersPage} />
         <Route path="/products/:productId" component={ProductPage} />
         <Route path="/sign-up" component={Signup} />
         {isLoggedIn && (
