@@ -6,6 +6,7 @@ import {Grid} from 'semantic-ui-react'
 
 const defaultState = {
   priceRange: [1, 1, 1, 1],
+  sizeRange: [0, 0, 0],
   rating: 0
 }
 
@@ -15,6 +16,7 @@ class AllProductsPage extends React.Component {
     this.state = defaultState
     this.onRate = this.onRate.bind(this)
     this.priceSelect = this.priceSelect.bind(this)
+    this.sizeSelect = this.sizeSelect.bind(this)
     this.clearFilters = this.clearFilters.bind(this)
   }
   onRate(event, {rating}) {
@@ -25,6 +27,11 @@ class AllProductsPage extends React.Component {
     newState[event.target.value] = 1 - newState[event.target.value]
     this.setState({priceRange: newState})
   }
+  sizeSelect(event) {
+    let newState = this.state.sizeRange.slice(0)
+    newState[event.target.value] = 1 - newState[event.target.value]
+    this.setState({sizeRange: newState})
+  }
   async componentDidMount() {
     await this.props.fetchAllProducts()
   }
@@ -34,8 +41,8 @@ class AllProductsPage extends React.Component {
   clearFilters() {
     this.setState(defaultState)
   }
-  render() {
-    const filterRating = this.props.allProducts.filter(item => {
+  filterRating(arr) {
+    return arr.filter(item => {
       const ratingArray = item.reviews || []
       const averageRating =
         ratingArray.reduce((sum, elem) => {
@@ -43,10 +50,39 @@ class AllProductsPage extends React.Component {
         }, 0) / ratingArray.length
       return this.state.rating > 0 ? averageRating >= this.state.rating : true
     })
-    const productsList = filterRating.filter(item => {
+  }
+  filterPrice(arr) {
+    return arr.filter(item => {
       const price = Number(item.price)
-      return item
+      const ranges = [[0, 15], [15, 25], [25, 50], [50, 100]]
+      for (let i = 0; i < ranges.length; i++) {
+        if (
+          ranges[i][0] <= price &&
+          price < ranges[i][1] &&
+          this.state.priceRange[i]
+        ) {
+          return item
+        }
+      }
     })
+  }
+  filterSize(arr) {
+    return arr.filter(item => {
+      const sizes = item.inventories.map(elem => elem.size)
+      const filterSizes = ['Small', 'Medium', 'Large']
+      const match = filterSizes.every(
+        (elem, index) =>
+          this.state.sizeRange[index] ? sizes.includes(elem) : true
+      )
+      if (match) {
+        return item
+      }
+    })
+  }
+  render() {
+    const productsList = this.filterSize(
+      this.filterPrice(this.filterRating(this.props.allProducts))
+    )
     return (
       <React.Fragment>
         <Grid columns={2}>
@@ -57,6 +93,8 @@ class AllProductsPage extends React.Component {
               rating={this.state.rating}
               priceSelect={this.priceSelect}
               priceRange={this.state.priceRange}
+              sizeSelect={this.sizeSelect}
+              sizeRange={this.state.sizeRange}
             />
           </Grid.Column>
           <Grid.Column width={12}>
