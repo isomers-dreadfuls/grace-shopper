@@ -1,8 +1,13 @@
 import React from 'react'
-import {Card, Image} from 'semantic-ui-react'
+import {Card, Image, Rating} from 'semantic-ui-react'
 import history from '../history'
 
 const ProductCard = props => {
+  const ratingArray = props.product.reviews || []
+  const averageRating =
+    ratingArray.reduce((sum, elem) => {
+      return sum + elem.rating
+    }, 0) / ratingArray.length
   return (
     <React.Fragment>
       <Card
@@ -16,6 +21,15 @@ const ProductCard = props => {
         <Card.Content>
           <Card.Header>{props.product.name}</Card.Header>
           <Card.Meta>{`$${props.product.price}`}</Card.Meta>
+          <Card.Meta>
+            <Rating
+              disabled
+              icon="star"
+              name="rating"
+              rating={averageRating}
+              maxRating={5}
+            />
+          </Card.Meta>
           <Card.Description>{props.product.description}</Card.Description>
         </Card.Content>
       </Card>
