@@ -1,16 +1,13 @@
 const Cart = require('./cart')
 const Inventory = require('./inventory')
 const Order = require('./order')
-const Payment = require('./payment')
+const OrderInventory = require('./orderInventory')
 const Product = require('./product')
 const Review = require('./review')
 const User = require('./user')
 
 User.hasMany(Review)
 Review.belongsTo(User)
-
-User.hasMany(Payment)
-Payment.belongsTo(User)
 
 Product.hasMany(Inventory)
 Inventory.belongsTo(Product)
@@ -21,20 +18,14 @@ Review.belongsTo(Product)
 Order.belongsTo(User)
 User.hasMany(Order)
 
-Order.belongsTo(Payment)
-Payment.hasMany(Order)
-
-Order.belongsToMany(Inventory, {through: 'order_inventory'})
-Inventory.belongsToMany(Order, {through: 'order_inventory'})
-
-// User.belongsToMany(Inventory, {through: Cart})
-// Inventory.belongsToMany(User, {through: Cart})
-
 Cart.belongsTo(User)
 User.hasMany(Cart)
 
 Cart.belongsTo(Inventory)
 Inventory.hasMany(Cart)
+
+Order.belongsToMany(Inventory, {through: OrderInventory})
+Inventory.belongsToMany(Order, {through: OrderInventory})
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
@@ -46,7 +37,7 @@ module.exports = {
   Cart,
   Inventory,
   Order,
-  Payment,
+  OrderInventory,
   Product,
   Review,
   User
