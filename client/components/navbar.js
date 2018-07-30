@@ -13,7 +13,7 @@ const Navbar = props => {
       key: 1,
       text: 'View My Account',
       onClick: () => {
-        history.push(`/user/${user.id}`)
+        history.push(`/users/${user.id}`)
       }
     },
     {
