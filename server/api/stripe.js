@@ -19,7 +19,7 @@ router.post('/', async (req, res, next) => {
       throw new Error('Inventory not enough')
     }
     // if there is enough inventory, then create a new stripe charge
-    const charge = await stripe.charges.create({
+    await stripe.charges.create({
       amount: 100 * parseInt(req.body.amount, 10),
       currency: 'usd',
       description: 'An example charge',
