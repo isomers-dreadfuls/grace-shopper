@@ -208,10 +208,11 @@ class ProductPage extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const singleProduct = state.product.singleProduct || {}
   return {
     user: state.user,
-    singleProduct: state.product.singleProduct || {},
-    inventories: state.product.singleProduct.inventories || []
+    singleProduct: singleProduct,
+    inventories: singleProduct.inventories || []
   }
 }
 

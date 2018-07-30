@@ -8,7 +8,7 @@ const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 const initialState = {
   allProducts: [],
   singleProduct: {},
-  search: ""
+  search: ''
 }
 
 // this route is for setting a single product to the store
@@ -28,11 +28,6 @@ export const setSearch = searchString => ({
   searchString
 })
 
-export const searchResult = searchResults => ({
-  type: SEARCH_PRODUCT,
-  searchResults
-})
-
 // this route is for retrieving one product from the database using the product id
 export const fetchProduct = productId => async dispatch => {
   const res = await axios.get(`/api/products/${productId}`)
@@ -45,7 +40,6 @@ export const fetchProduct = productId => async dispatch => {
 export const fetchAllProducts = () => async dispatch => {
   const res = await axios.get('/api/products')
   const allProducts = res.data
-  console.log(allProducts)
   const action = getAllProducts(allProducts)
   dispatch(action)
 }
@@ -54,12 +48,17 @@ export const searchProducts = searchKey => async dispatch => {
   const res = await axios.get('/api/products')
   const all = res.data
   const returnArray = all.filter((product) => {
+    if(searchKey) {
     const query = searchKey.toUpperCase()
     const productName = product.name.toUpperCase()
     return (productName.includes(query))
+    }
+    else{
+      return (product)
+    }
   })
   dispatch(setSearch(searchKey))
-  dispatch(searchResult(returnArray))
+  dispatch(getAllProducts(returnArray))
 }
 
 // this route is for adding a review to a specific product
@@ -91,11 +90,8 @@ export default function(state = initialState, action) {
       }
     case SET_SEARCH:
       return {
-        ...state, search: action.searchString
-      }
-    case SEARCH_PRODUCT:
-      return {
-        allProducts: action.searchResults
+        ...state,
+        search: action.searchString
       }
     default:
       return state
