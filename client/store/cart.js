@@ -11,6 +11,7 @@ export const addToCart = newCart => ({
 
 export const addToUserCart = ids => async dispatch => {
   const response = await axios.put('/api/carts/add', ids)
+  console.log(response)
   const newCart = response.data
   dispatch(addToCart(newCart))
 }
@@ -51,6 +52,7 @@ export const calculateSubtotal = cart => {
 
 export const checkout = info => async dispatch => {
   await axios.post('/api/stripe', {
+    cart: info.cart,
     amount: calculateSubtotal(info.cart)[0],
     id: info.id,
     userId: info.userId

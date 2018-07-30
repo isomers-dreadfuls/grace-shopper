@@ -48,6 +48,7 @@ const createApp = () => {
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))
+  app.use(cookieParser())
 
   // compression middleware
   app.use(compression())
@@ -68,7 +69,6 @@ const createApp = () => {
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
 
-  app.use(cookieParser())
   app.use(function(req, res, next) {
     // check if client sent cookie
     console.log('session id is: , ', req.session.id)

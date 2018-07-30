@@ -5,10 +5,9 @@ module.exports = router
 
 router.post('/', async (req, res, next) => {
   try {
-    // need to check inventory
-    let checkoutCart = await Cart.findAll({where: {userId: req.body.userId}})
+    let checkoutCart = req.body.cart
     let inventoryArray = []
-    let inventoryCheck = checkoutCart.every(async item => {
+    let inventoryCheck = await checkoutCart.every(async item => {
       const inventoryEntry = await Inventory.findById(item.inventoryId)
       inventoryArray.push(inventoryEntry)
       return inventoryEntry.quantity >= item.quantity
@@ -33,7 +32,7 @@ router.post('/', async (req, res, next) => {
     })
     inventoryArray.forEach(async item => {
       const result = checkoutCart.filter(
-        cartItem => cartItem.inventoryId === item.id
+        cartItem => +cartItem.inventoryId === +item.id
       )
       const quantity = result[0].quantity
       await item.decrement('quantity', {
@@ -48,6 +47,7 @@ router.post('/', async (req, res, next) => {
         userId: req.body.userId
       }
     })
+    res.cookie('cart', {})
     res.sendStatus(200)
   } catch (error) {
     next(error)

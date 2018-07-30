@@ -24,34 +24,51 @@ const findFromDb = (userId, inventoryId) =>
 
 router.put('/add', async (req, res, next) => {
   try {
-    const cartArray = []
-    if (req.body.inventoryId) {
-      const cartProduct = await findFromDb(
-        req.body.userId,
-        req.body.inventoryId
-      )
-      await cartProduct[0].increment('quantity', {
-        by: req.body.quantity
-      })
-
-      // THIS IS NOT QUITE RIGHT - IT SETS THE COOKIE TO ONLY THE LATEST ITEM
-      if (cartProduct.length) {
-        cartArray.push({
-          i: cartProduct[0].inventoryId,
-          q: cartProduct[0].quantity
+    if (req.body.userId) {
+      if (req.body.inventoryId) {
+        const cartProduct = await findFromDb(
+          req.body.userId,
+          req.body.inventoryId
+        )
+        await cartProduct[0].increment('quantity', {
+          by: req.body.quantity
         })
-        res.cookie('cart', JSON.stringify(cartArray))
       }
-    }
-    const newCart = await cartFromDb(req.body.userId)
-    if (newCart.length) {
-      //update cart cookie with inventory and quantity
-      newCart.map(item => {
-        cartArray.push({i: item.inventoryId, q: item.quantity})
+      const newCart = await cartFromDb(req.body.userId)
+      res.send(newCart)
+    } else {
+      const oldCookie = req.cookies ? req.cookies.cart : {}
+      const newCart = []
+      let previousQuantity = 0
+      for (let key in oldCookie) {
+        if (key === req.body.inventoryId) {
+          previousQuantity = +oldCookie[key]
+        } else {
+          const inventory = await Inventory.findOne({
+            where: {id: key},
+            include: [{model: Product}]
+          })
+          newCart.push({inventoryId: key, quantity: oldCookie[key], inventory})
+        }
+      }
+      if (req.body.inventoryId) {
+        const inventory = await Inventory.findOne({
+          where: {id: req.body.inventoryId},
+          include: [{model: Product}]
+        })
+        newCart.push({
+          inventory,
+          inventoryId: req.body.inventoryId,
+          quantity: +req.body.quantity + previousQuantity
+        })
+      }
+      const newCookie = {}
+      newCart.forEach(item => {
+        newCookie[item.inventoryId] = item.quantity
       })
-      res.cookie('cart', JSON.stringify(cartArray))
+      res.cookie('cart', newCookie)
+      res.send(newCart)
     }
-    res.send(newCart)
   } catch (error) {
     console.log(error)
     next(error)
@@ -60,25 +77,48 @@ router.put('/add', async (req, res, next) => {
 
 router.put('/edit', async (req, res, next) => {
   try {
-    if (req.body.inventoryId) {
-      const cartProduct = await findFromDb(
-        req.body.userId,
-        req.body.inventoryId
-      )
-      await cartProduct[0].update({
-        quantity: req.body.quantity
+    if (req.body.userId) {
+      if (req.body.inventoryId) {
+        const cartProduct = await findFromDb(
+          req.body.userId,
+          req.body.inventoryId
+        )
+        await cartProduct[0].update({
+          quantity: req.body.quantity
+        })
+      }
+      const newCart = await cartFromDb(req.body.userId)
+      res.send(newCart)
+    } else {
+      const oldCookie = req.cookies ? req.cookies.cart : {}
+      const newCart = []
+      for (let key in oldCookie) {
+        if (key !== req.body.inventoryId) {
+          const inventory = await Inventory.findOne({
+            where: {id: key},
+            include: [{model: Product}]
+          })
+          newCart.push({inventoryId: key, quantity: oldCookie[key], inventory})
+        }
+      }
+      if (req.body.inventoryId) {
+        const inventory = await Inventory.findOne({
+          where: {id: req.body.inventoryId},
+          include: [{model: Product}]
+        })
+        newCart.push({
+          inventory,
+          inventoryId: req.body.inventoryId,
+          quantity: req.body.quantity
+        })
+      }
+      const newCookie = {}
+      newCart.forEach(item => {
+        newCookie[item.inventoryId] = item.quantity
       })
+      res.cookie('cart', newCookie)
+      res.send(newCart)
     }
-    const newCart = await cartFromDb(req.body.userId)
-    if (newCart) {
-      //update cart cookie with inventory and quantity
-      const cartArray = []
-      newCart.map(item => {
-        cartArray.push({i: item.inventoryId, q: item.quantity})
-      })
-      res.cookie('cart', JSON.stringify(cartArray))
-    }
-    res.send(newCart)
   } catch (error) {
     next(error)
   }
@@ -86,14 +126,34 @@ router.put('/edit', async (req, res, next) => {
 
 router.put('/delete', async (req, res, next) => {
   try {
-    await Cart.destroy({
-      where: {
-        userId: req.body.userId,
-        inventoryId: req.body.inventoryId
+    if (req.body.userId) {
+      await Cart.destroy({
+        where: {
+          userId: req.body.userId,
+          inventoryId: req.body.inventoryId
+        }
+      })
+      const newCart = await cartFromDb(req.body.userId)
+      res.send(newCart)
+    } else {
+      const oldCookie = req.cookies ? req.cookies.cart : {}
+      const newCart = []
+      for (let key in oldCookie) {
+        if (key !== req.body.inventoryId) {
+          const inventory = await Inventory.findOne({
+            where: {id: key},
+            include: [{model: Product}]
+          })
+          newCart.push({inventory, inventoryId: key, quantity: oldCookie[key]})
+        }
       }
-    })
-    const newCart = await cartFromDb(req.body.userId)
-    res.send(newCart)
+      const newCookie = {}
+      newCart.forEach(item => {
+        newCookie[item.inventoryId] = item.quantity
+      })
+      res.cookie('cart', newCookie)
+      res.send(newCart)
+    }
   } catch (error) {
     next(error)
   }
