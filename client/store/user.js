@@ -8,6 +8,7 @@ import {addToUserCart} from './cart'
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const EDIT_USER = 'EDIT_USER'
 
 /**
  * INITIAL STATE
@@ -19,7 +20,7 @@ const defaultUser = {}
  */
 const getUser = user => ({type: GET_USER, user})
 const removeUser = () => ({type: REMOVE_USER})
-
+const editUser = (user) => ({type: EDIT_USER, user})
 /**
  * THUNK CREATORS
  */
@@ -27,6 +28,12 @@ export const fetchSingleUser = (userId) => async dispatch => {
   const res = await axios.get(`/api/users/${userId}`)
   const user = res.data;
   dispatch(getUser(user));
+}
+
+export const updateUser = (updatedUser, userId) => async dispatch => {
+  const update = await axios.put(`/api/users/${userId}`, updatedUser)
+  const userUpdate = update.data
+  dispatch(editUser(userUpdate))
 }
 
 export const me = () => async dispatch => {
@@ -74,7 +81,9 @@ export default function(state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
-    default:
+    case EDIT_USER:
+      return action.user
+      default: 
       return state
   }
 }

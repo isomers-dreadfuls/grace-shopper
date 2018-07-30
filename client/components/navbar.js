@@ -12,7 +12,7 @@ const Navbar = ({handleClick, isLoggedIn, user}) => {
       key: 1,
       text: 'View My Account',
       onClick: () => {
-        history.push(`/user/${user.id}`)
+        history.push(`/users/${user.id}`)
       }
     },
     {

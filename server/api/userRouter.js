@@ -19,11 +19,18 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.post('/:id', async (req, res, next) => {
+router.put(":/id", async (req, res, next) => {
   try {
-    const newUser = await User.create(req.body)
+    console.log("HIT ROUTER!")
+    const edit = req.body
+    const update = await User.update(edit, {
+      where: {
+        id: req.params.id
+      }
+    })
+    res.json(update)
   } catch (error) {
-    next(error);
+    next(error)
   }
 })
 
