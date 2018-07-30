@@ -40,7 +40,6 @@ export const fetchProduct = productId => async dispatch => {
 export const fetchAllProducts = () => async dispatch => {
   const res = await axios.get('/api/products')
   const allProducts = res.data
-  console.log(allProducts)
   const action = getAllProducts(allProducts)
   dispatch(action)
 }
