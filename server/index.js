@@ -1,5 +1,6 @@
 const path = require('path')
 const express = require('express')
+const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
 const compression = require('compression')
 const session = require('express-session')
