@@ -20,7 +20,7 @@ const Navbar = props => {
       key: 2,
       text: 'View Orders',
       onClick: () => {
-        console.log('VIEW ORDERS')
+        history.push(`/orders/${user.id}`)
       }
     },
     {

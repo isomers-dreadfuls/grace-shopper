@@ -5,12 +5,12 @@ const request = require('supertest')
 const db = require('../db')
 const app = require('../index')
 const agent = request(app)
-const Review = db.model('review')
+const Order = db.model('order')
 const User = db.model('user')
 const Inventory = db.model('inventory')
 const Product = db.model('product')
 
-describe('User routes', () => {
+describe('Order routes', () => {
   beforeEach(async () => {
     await db.sync({force: true})
     await User.create({email: 'test@test.com', password: 'test'})
@@ -20,32 +20,27 @@ describe('User routes', () => {
       image: 'testimage1.jpg',
       description: 'test1 description'
     })
-    await Inventory.create({
+    const inventory = await Inventory.create({
       size: 'Medium',
       quantity: 10,
       productId: 1
     })
-    await Review.create({
-      rating: 5,
-      reviewText: 'test',
-      userId: 1,
-      productId: 1
+    const order = await Order.create({
+      price: 1000,
+      shippingAddress: 'test1',
+      shippingCity: 'test1',
+      shippingState: 'test1',
+      shippingZip: 11111,
+      orderStatus: 'placed',
+      userId: 1
     })
+    order.addInventories(inventory)
   })
-  describe('get /api/products/', () => {
+  describe('get /api/orders/:id', () => {
     it('gets all products', async () => {
-      const response = await agent.get('/api/products/').expect(200)
+      const response = await agent.get('/api/orders/1').expect(200)
       expect(response.body).to.have.length(1)
       expect(response.body[0].id).to.equal(1)
-    })
-  })
-  describe('get /api/products/:productId', () => {
-    it('gets one products', async () => {
-      const response = await agent.get('/api/products/1').expect(200)
-      expect(response.body.id).to.equal(1)
-      expect(response.body.name).to.equal('test1 sweater')
-      expect(response.body.inventories[0].size).to.equal('Medium')
-      expect(response.body.inventories[0].productId).to.equal(1)
     })
   })
 })

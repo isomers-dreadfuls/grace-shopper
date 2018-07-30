@@ -31,6 +31,7 @@ describe('user thunk creators', () => {
     it('eventually dispatches the GET USER action', async () => {
       const fakeUser = {email: 'Cody'}
       mockAxios.onGet('/auth/me').replyOnce(200, fakeUser)
+      mockAxios.onPut('/api/carts/add').replyOnce(200, {})
       await store.dispatch(me())
       const actions = store.getActions()
       expect(actions[0].type).to.be.equal('GET_USER')

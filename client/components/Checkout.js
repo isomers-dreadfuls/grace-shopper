@@ -1,6 +1,6 @@
 import React from 'react'
 import {StripeProvider, Elements} from 'react-stripe-elements'
-import InjectedCheckoutForm from './CheckoutForm'
+import {InjectedCheckoutForm} from './index'
 
 class Checkout extends React.Component {
   constructor() {
