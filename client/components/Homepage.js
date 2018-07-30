@@ -18,7 +18,7 @@ class Homepage extends React.Component {
         <div id="home-page-banner-container">
           <img src="img/banner1.png" alt="banner image 1" />
           <Link to="/products" id="home-page-banner-button">
-            Shop All Sweaters <i class="fas fa-arrow-right" />
+            Shop All Sweaters <i className="fas fa-arrow-right" />
           </Link>
         </div>
         <div id="home-page-new-products-container">
