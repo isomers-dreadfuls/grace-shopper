@@ -33,9 +33,7 @@ class AllProductsPage extends React.Component {
     this.setState({sizeRange: newState})
   }
   async componentDidMount() {
-
     await this.props.fetchAllProducts()
-
   }
   componentWillUnmount() {
     this.props.clearProducts()
