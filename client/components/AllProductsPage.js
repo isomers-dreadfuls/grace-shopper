@@ -33,12 +33,9 @@ class AllProductsPage extends React.Component {
     this.setState({sizeRange: newState})
   }
   async componentDidMount() {
-   if(!this.state.search){
+
     await this.props.fetchAllProducts()
-   }
-   else{
-    await this.props.
-   }
+
   }
   componentWillUnmount() {
     this.props.clearProducts()
@@ -129,8 +126,7 @@ const mapDispatchToProps = dispatch => {
     },
     clearProducts: () => {
       dispatch(getAllProducts([]))
-    },
-
+    }
   }
 }
 

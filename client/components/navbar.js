@@ -33,7 +33,7 @@ const Navbar = props => {
   ]
   const handleSubmit = event => {
     event.preventDefault()
-    this.props.search(event.target.search.value)
+    props.search(event.target.search.value)
     history.push('/products')
   }
   return (
@@ -123,7 +123,7 @@ const mapDispatch = dispatch => {
       dispatch(logout())
     },
     search: (searchKey) => {
-      searchProducts(searchKey)
+      dispatch(searchProducts(searchKey))
     }
   }
 }
