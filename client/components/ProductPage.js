@@ -157,11 +157,27 @@ class ProductPage extends React.Component {
                   <option value="" key={0}>
                     Choose Size
                   </option>
-                  {inventories.map(item => {
-                    return (
-                      <option value={item.id} key={item.id}>
-                        {item.size}
+                  {[
+                    'X-Small',
+                    'Small',
+                    'Medium',
+                    'Large',
+                    'X-Large',
+                    '2X-Large',
+                    '3X-Large',
+                    '4X-Large',
+                    '5X-Large',
+                    '6X-Large'
+                  ].map(size => {
+                    const inventoryItem = inventories.filter(
+                      item => item.size === size
+                    )[0]
+                    return inventoryItem && inventoryItem.quantity > 0 ? (
+                      <option key={inventoryItem.id} value={inventoryItem.id}>
+                        {size}
                       </option>
+                    ) : (
+                      <option disabled>{size} (Out of Stock)</option>
                     )
                   })}
                 </select>
