@@ -33,9 +33,7 @@ class AllProductsPage extends React.Component {
     this.setState({sizeRange: newState})
   }
   async componentDidMount() {
-
     await this.props.fetchAllProducts()
-
   }
   componentWillUnmount() {
     this.props.clearProducts()
@@ -99,6 +97,8 @@ class AllProductsPage extends React.Component {
               sizeRange={this.state.sizeRange}
             />
           </Grid.Column>
+
+          
           <Grid.Column width={12}>
             <div className="ui four cards">
               {productsList.map(product => {

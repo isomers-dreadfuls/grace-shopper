@@ -28,6 +28,8 @@ export const setSearch = searchString => ({
   searchString
 })
 
+
+
 export const searchResult = searchResults => ({
   type: SEARCH_PRODUCT,
   searchResults
@@ -54,9 +56,14 @@ export const searchProducts = searchKey => async dispatch => {
   const res = await axios.get('/api/products')
   const all = res.data
   const returnArray = all.filter((product) => {
+    if(searchKey) {
     const query = searchKey.toUpperCase()
     const productName = product.name.toUpperCase()
     return (productName.includes(query))
+    }
+    else{
+      return (product)
+    }
   })
   dispatch(setSearch(searchKey))
   dispatch(searchResult(returnArray))
@@ -95,6 +102,7 @@ export default function(state = initialState, action) {
       }
     case SEARCH_PRODUCT:
       return {
+        ...state,
         allProducts: action.searchResults
       }
     default:
