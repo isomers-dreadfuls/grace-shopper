@@ -1,5 +1,10 @@
 [
   {
+    "size": "Small",
+    "quantity": 0,
+    "productId": 1
+  },
+  {
     "size": "Medium",
     "quantity": 1,
     "productId": 1
@@ -7,6 +12,11 @@
   {
     "size": "Large",
     "quantity": 1,
+    "productId": 1
+  },
+  {
+    "size": "2X-Large",
+    "quantity": 10,
     "productId": 1
   },
   {
@@ -105,18 +115,28 @@
     "productId": 8
   },
   {
-    "size": "Small",
+    "size": "X-Small",
     "quantity": 5,
     "productId": 9
   },
   {
     "size": "Medium",
-    "quantity": 7,
+    "quantity": 2,
     "productId": 9
   },
   {
     "size": "Large",
     "quantity": 1,
+    "productId": 9
+  },
+  {
+    "size": "4X-Large",
+    "quantity": 1,
+    "productId": 9
+  },
+  {
+    "size": "5X-Large",
+    "quantity": 2,
     "productId": 9
   },
   {
