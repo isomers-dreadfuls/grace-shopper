@@ -20,7 +20,7 @@ class UserInfoPage extends Component {
           {(user.firstName)?(<h2>Welcome {user.firstName}</h2>):(<h2>Welcome User!</h2>)}
           <div>
             <h3>Account Info</h3>
-            <p>name: {user.fullName}</p>
+            <p>name: {user.firstName +  " " + user.lastName}</p>
             <p>email: {user.email}</p>
           </div>
           <div>

@@ -19,9 +19,8 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-router.put(":/id", async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    console.log("HIT ROUTER!")
     const edit = req.body
     const update = await User.update(edit, {
       where: {

@@ -8,7 +8,6 @@ class EditUserInfo extends Component {
     this.state = {
       firstName: '',
       lastName: '',
-      email: '',
       userAddress: '',
       userCity: '',
       userState: '',
@@ -27,7 +26,9 @@ class EditUserInfo extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    this.props.update(this.props.state, this.props.user.id)
+    console.log(this.state)
+    console.log(this.props.user.id)
+    this.props.update(this.state, this.props.user.id)
     this.props.history.push(`/users/${this.props.user.id}`)
   }
 
@@ -73,7 +74,9 @@ class EditUserInfo extends Component {
 }
 
 const mapStateToProps = state => {
-  return { user: state.user}
+  return { 
+    user: state.user
+  }
 }
 
 const mapDispatchToProps = dispatch => {

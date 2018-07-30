@@ -31,9 +31,8 @@ export const fetchSingleUser = (userId) => async dispatch => {
 }
 
 export const updateUser = (updatedUser, userId) => async dispatch => {
-  const update = await axios.put(`/api/users/${userId}`, updatedUser)
-  const userUpdate = update.data
-  dispatch(editUser(userUpdate))
+  const response = await axios.put(`/api/users/${userId}`, updatedUser)
+  dispatch(editUser(response.data))
 }
 
 export const me = () => async dispatch => {
@@ -44,7 +43,7 @@ export const me = () => async dispatch => {
   } catch (err) {
     console.error(err)
   }
-}
+  }
 
 export const auth = (email, password, method) => async dispatch => {
   let res
@@ -83,7 +82,7 @@ export default function(state = defaultUser, action) {
       return defaultUser
     case EDIT_USER:
       return action.user
-      default: 
+    default: 
       return state
   }
 }
