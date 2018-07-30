@@ -6,8 +6,6 @@ import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
 import {searchProducts} from '../store/product'
 
-
-
 const Navbar = props => {
   const {handleClick, isLoggedIn, user} = props
   const options = [
@@ -34,6 +32,7 @@ const Navbar = props => {
   const handleSubmit = event => {
     event.preventDefault()
     props.search(event.target.search.value)
+    event.target.search.value = ''
     history.push('/products')
   }
   return (
@@ -58,20 +57,18 @@ const Navbar = props => {
           </Menu.Item>
           <Menu.Item
             onClick={() => {
-              
               history.push('/about')
             }}
           >
             About Us
           </Menu.Item>
           <div className="right menu">
-
-          <Menu.Item>
-            <form onSubmit={handleSubmit}>
-              <input type="text" name="search"/>
-              <button type="submit">Search</button>
-            </form>
-          </Menu.Item>
+            <Menu.Item>
+              <form onSubmit={handleSubmit}>
+                <input type="text" name="search" />
+                <button type="submit">Search</button>
+              </form>
+            </Menu.Item>
 
             <Menu.Item
               onClick={() => {
@@ -124,9 +121,9 @@ const mapDispatch = dispatch => {
     handleClick() {
       dispatch(logout())
     },
-    search: (searchKey) => {
+    search: searchKey => {
       dispatch(searchProducts(searchKey))
-    },
+    }
   }
 }
 

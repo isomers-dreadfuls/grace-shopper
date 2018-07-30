@@ -1,6 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchAllProducts, getAllProducts, searchProducts} from '../store/product'
+import {
+  fetchAllProducts,
+  getAllProducts,
+  searchProducts
+} from '../store/product'
 import {ProductCard, Sidebar} from './index'
 import {Grid} from 'semantic-ui-react'
 
@@ -38,15 +42,14 @@ class AllProductsPage extends React.Component {
     this.props.clearProducts()
   }
   async componentDidMount() {
-    if(this.props.search){ 
+    if (this.props.search) {
       await this.props.searchResult(this.props.search)
-    }
-    else{
+    } else {
       await this.props.fetchAllProducts()
     }
   }
   componentWillUnmount() {
-    this.props.clearProducts()
+    this.props.searchResult('')
   }
   clearFilters() {
     this.setState(defaultState)
@@ -107,8 +110,16 @@ class AllProductsPage extends React.Component {
               sizeRange={this.state.sizeRange}
             />
           </Grid.Column>
-          {(this.props.search)?(<h3>Showing {this.props.allProducts.length} related to "{this.props.search}"</h3>):(<h3>All Products</h3>)}
           <Grid.Column width={12}>
+            {this.props.search ? (
+              <h3>
+                Showing {this.props.allProducts.length} related to "{
+                  this.props.search
+                }"
+              </h3>
+            ) : (
+              <h3>All Products</h3>
+            )}
             <div className="ui four cards">
               {productsList.map(product => {
                 return <ProductCard key={product.id} product={product} />
@@ -124,7 +135,7 @@ class AllProductsPage extends React.Component {
 const mapStateToProps = state => {
   return {
     allProducts: state.product.allProducts || [],
-    search: state.product.search,
+    search: state.product.search
   }
 }
 
@@ -136,7 +147,7 @@ const mapDispatchToProps = dispatch => {
     clearProducts: () => {
       dispatch(getAllProducts([]))
     },
-    searchResult: (searchKey) => {
+    searchResult: searchKey => {
       dispatch(searchProducts(searchKey))
     }
   }

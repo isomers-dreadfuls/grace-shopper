@@ -46,5 +46,11 @@
     "reviewText": "I love this one!",
     "userId": 2,
     "productId": 6
+  },
+  {
+    "rating": 5,
+    "reviewText": "Holy **** this sweater is good",
+    "userId": 1,
+    "productId": 9
   }
 ]
