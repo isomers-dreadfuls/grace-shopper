@@ -8,7 +8,7 @@ class AllProductsPage extends React.Component {
   constructor() {
     super()
     this.state = {
-      rating: 1
+      rating: 1,
     }
     this.onRate = this.onRate.bind(this)
   }
@@ -16,7 +16,12 @@ class AllProductsPage extends React.Component {
     this.setState({rating})
   }
   async componentDidMount() {
+   if(!this.state.search){
     await this.props.fetchAllProducts()
+   }
+   else{
+    await this.props.
+   }
   }
   componentWillUnmount() {
     this.props.clearProducts()
@@ -43,7 +48,8 @@ class AllProductsPage extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    allProducts: state.product.allProducts || []
+    allProducts: state.product.allProducts || [],
+    search: state.product.search
   }
 }
 
@@ -54,7 +60,8 @@ const mapDispatchToProps = dispatch => {
     },
     clearProducts: () => {
       dispatch(getAllProducts([]))
-    }
+    },
+    
   }
 }
 

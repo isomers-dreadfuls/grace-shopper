@@ -3,8 +3,11 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Dropdown, Menu, Label} from 'semantic-ui-react'
+import {Dropdown, Menu, Label, Search} from 'semantic-ui-react'
 import history from '../history'
+import {searchProducts} from '../store/product'
+
+
 
 const Navbar = props => {
   const {handleClick, isLoggedIn, user} = props
@@ -29,7 +32,11 @@ const Navbar = props => {
       onClick: handleClick
     }
   ]
-
+  const handleSubmit = event => {
+    event.preventDefault()
+    this.props.search(event.target.search.value)
+    history.push('/products')
+  }
   return (
     <nav>
       <div id="navbar-container">
@@ -57,6 +64,14 @@ const Navbar = props => {
             About Us
           </Menu.Item>
           <div className="right menu">
+
+          <Menu.Item>
+            <form onSubmit={handleSubmit}>
+              <input type="text" name="search"/>
+              <button type="submit">Search</button>
+            </form>
+          </Menu.Item>
+
             <Menu.Item
               onClick={() => {
                 history.push('/cart')
@@ -107,6 +122,9 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    search: (searchKey) => {
+      searchProducts(searchKey)
     }
   }
 }
