@@ -16,9 +16,9 @@ class Homepage extends React.Component {
     return (
       <React.Fragment>
         <div id="home-page-banner-container">
-          <img src="img/banner.png" alt="banner image" />
+          <img src="img/banner1.png" alt="banner image 1" />
           <Link to="/products" id="home-page-banner-button">
-            Shop All Sweaters
+            Shop All Sweaters <i class="fas fa-arrow-right" />
           </Link>
         </div>
         <div id="home-page-new-products-container">
@@ -28,6 +28,15 @@ class Homepage extends React.Component {
               return <ProductCard key={product.id} product={product} />
             })}
           </div>
+        </div>
+        <div id="home-page-press-container">
+          <h3>Featured In</h3>
+          <span>
+            <img src="img/techcrunch.png" alt="tc logo" />
+            <img src="img/elle.svg" alt="elle logo" />
+            <img src="img/gq.png" alt="gq logo" />
+            <img src="img/vogue.svg" alt="vogue logo" />
+          </span>
         </div>
       </React.Fragment>
     )
