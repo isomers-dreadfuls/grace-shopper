@@ -7,12 +7,14 @@ import {Grid} from 'semantic-ui-react'
 class CartPage extends React.Component {
   render() {
     return this.props.cart.length === 0 ? (
-      <React.Fragment>
-        <h2>Cart</h2>
-        <Link to="/products" className="item">
-          Your cart is empty. Click here to take a look at our products!
-        </Link>
-      </React.Fragment>
+      <div id="cart-page-container">
+        <React.Fragment>
+          <h2>Cart</h2>
+          <Link to="/products" className="item">
+            Your cart is empty. Click here to take a look at our products!
+          </Link>
+        </React.Fragment>
+      </div>
     ) : (
       <Grid columns={2} id="cart-page-container">
         <Grid.Column width={12}>
