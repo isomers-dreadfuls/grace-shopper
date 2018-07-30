@@ -23,6 +23,8 @@ class ProductPage extends React.Component {
   componentWillUnmount() {
     this.props.unMountProduct()
   }
+  // function that changes the maximum quantity of item that can be purchased, based on the currently selected size
+  // it also resets the purchase state to 'false'
   handleSizeChange(event) {
     if (event.target.value !== '') {
       let newQuantity = this.props.inventories.filter(prod => {
@@ -33,9 +35,11 @@ class ProductPage extends React.Component {
         purchase: 'false'
       })
     } else {
+      // if no size is selected (ie. the 'Choose Size' option), then disable the purchase button
       this.setState({quantity: NaN, purchase: 'disabled'})
     }
   }
+  // function that displays different message depending on quantity of inventory in stock
   sizeCheck() {
     switch (true) {
       case this.state.quantity === 0:
@@ -48,6 +52,7 @@ class ProductPage extends React.Component {
         return null
     }
   }
+  // function that displays different submit button depending on status of purchase
   buttonCheck() {
     switch (true) {
       case this.state.purchase === 'complete':
@@ -77,6 +82,8 @@ class ProductPage extends React.Component {
         )
     }
   }
+  // event to add item to cart
+  // currently using a setTimeout of 0.5 seconds to give feedback to user after they press it
   async addToCartButton(event) {
     event.preventDefault()
     this.setState({purchase: 'loading'})
