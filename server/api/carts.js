@@ -24,6 +24,7 @@ const findFromDb = (userId, inventoryId) =>
 
 router.put('/add', async (req, res, next) => {
   try {
+    const cartArray = []
     if (req.body.inventoryId) {
       const cartProduct = await findFromDb(
         req.body.userId,
@@ -32,10 +33,27 @@ router.put('/add', async (req, res, next) => {
       await cartProduct[0].increment('quantity', {
         by: req.body.quantity
       })
+
+      // THIS IS NOT QUITE RIGHT - IT SETS THE COOKIE TO ONLY THE LATEST ITEM
+      if (cartProduct.length) {
+        cartArray.push({
+          i: cartProduct[0].inventoryId,
+          q: cartProduct[0].quantity
+        })
+        res.cookie('cart', JSON.stringify(cartArray))
+      }
     }
     const newCart = await cartFromDb(req.body.userId)
+    if (newCart.length) {
+      //update cart cookie with inventory and quantity
+      newCart.map(item => {
+        cartArray.push({i: item.inventoryId, q: item.quantity})
+      })
+      res.cookie('cart', JSON.stringify(cartArray))
+    }
     res.send(newCart)
   } catch (error) {
+    console.log(error)
     next(error)
   }
 })
@@ -52,6 +70,14 @@ router.put('/edit', async (req, res, next) => {
       })
     }
     const newCart = await cartFromDb(req.body.userId)
+    if (newCart) {
+      //update cart cookie with inventory and quantity
+      const cartArray = []
+      newCart.map(item => {
+        cartArray.push({i: item.inventoryId, q: item.quantity})
+      })
+      res.cookie('cart', JSON.stringify(cartArray))
+    }
     res.send(newCart)
   } catch (error) {
     next(error)
