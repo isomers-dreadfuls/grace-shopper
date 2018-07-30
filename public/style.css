@@ -53,11 +53,14 @@ a {
 
 /* About Page */
 
-#about-page-container {
+#about-page-container,
+#auth-container,
+#cart-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 5%;
+  margin: 5% 0;
+  height: 60vh;
 }
 
 #about-page-container h1 {
@@ -68,4 +71,83 @@ a {
 #about-page-container p {
   font-size: 24px;
   font-weight: 400;
+}
+
+/* Cart Page */
+
+#cart-page-container h2 {
+  font-weight: 800;
+  font-size: 30px;
+}
+
+/* Login/Signup */
+
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 20px;
+}
+
+#auth-container input {
+  width: 180px;
+  height: 30px;
+}
+
+#auth-container button {
+  width: 250px;
+  height: 40px;
+  margin: 5% 0;
+}
+
+/* Footer */
+
+#footer-container {
+  display: flex;
+  height: 15vh;
+  margin-top: 1vh;
+  background-color: #f8f8f8;
+}
+
+#footer-container h5 {
+  font-weight: 800;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+#footer-left,
+#footer-middle,
+#footer-right {
+  display: flex;
+  flex-direction: column;
+  margin: 2% 5%;
+}
+
+#footer-left {
+  align-items: center;
+  width: 20vw;
+}
+
+#footer-middle {
+  align-items: center;
+  width: 20vw;
+}
+
+#footer-right {
+  align-items: center;
+  width: 60vw;
+  margin: 3% 5%;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+#icons {
+  font-size: 24px;
+}
+
+#icons a {
+  margin: 0 15px;
 }

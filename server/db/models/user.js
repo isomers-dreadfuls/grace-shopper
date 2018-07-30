@@ -17,10 +17,6 @@ const User = db.define('user', {
     isEmail: true,
     allowNull: false
   },
-  fullName: {
-    type: Sequelize.STRING //ADD HOOK
-  },
-
   //SECURITY
   salt: {
     type: Sequelize.STRING,
@@ -93,12 +89,7 @@ const setSaltAndPassword = user => {
   }
 }
 
-const setFullName = user => {
-  user.fullName = user.firstName + ' ' + user.lastName
-}
-
 User.beforeCreate(setSaltAndPassword)
 User.beforeUpdate(setSaltAndPassword)
-User.afterCreate(setFullName)
 
 module.exports = User
