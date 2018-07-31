@@ -2,7 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {ProductRow, CartSummary} from './index'
-import {Grid} from 'semantic-ui-react'
+import history from '../history'
+import {Grid, Button} from 'semantic-ui-react'
 
 class CartPage extends React.Component {
   render() {
@@ -21,13 +22,20 @@ class CartPage extends React.Component {
           <h2>Cart</h2>
           <Grid columns={4}>
             {this.props.cart.map(product => (
-              <ProductRow key={product.id} product={product} />
+              <ProductRow key={product.inventoryId} product={product} />
             ))}
           </Grid>
         </Grid.Column>
         <Grid.Column width={3} id="cart-summary-container">
           <CartSummary cart={this.props.cart} />
-          <Link to="/checkout">Checkout</Link>
+          <Button
+            positive
+            onClick={() => {
+              history.push('/checkout')
+            }}
+          >
+            Checkout
+          </Button>
         </Grid.Column>
       </Grid>
     )
