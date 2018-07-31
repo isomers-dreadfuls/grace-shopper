@@ -59,7 +59,7 @@ class AllProductsPage extends React.Component {
   filterPrice(arr) {
     return arr.filter(item => {
       const price = Number(item.price)
-      const ranges = [[0, 15], [15, 25], [25, 50], [50, 100]]
+      const ranges = [[0, 15], [15, 25], [25, 50], [50, 101]]
       for (let i = 0; i < ranges.length; i++) {
         if (
           ranges[i][0] <= price &&
