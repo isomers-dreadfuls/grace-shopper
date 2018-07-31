@@ -3,21 +3,17 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
-import {Button, Header, Modal, Icon} from 'semantic-ui-react'
+import {clearHomePromo} from '../store/home'
+import {Modal} from 'semantic-ui-react'
 
 class Homepage extends React.Component {
   constructor() {
     super()
-    this.state = {
-      showModal: true
-    }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick = () => {
-    this.setState({
-      showModal: false
-    })
+    this.props.clearModal()
   }
   async componentDidMount() {
     await this.props.fetchAllProducts()
@@ -31,7 +27,7 @@ class Homepage extends React.Component {
       <React.Fragment>
         <div id="home-page-banner-container" onClick={this.handleClick}>
           <Modal
-            open={this.state.showModal}
+            open={this.props.showModal}
             size="fullscreen"
             dimmer="blurring"
           >
@@ -84,7 +80,8 @@ const mapStateToProps = state => {
   let allProducts = state.product.allProducts
   let newProducts = allProducts.sort((a, b) => a.createdAt > b.createdAt)
   return {
-    newProducts: newProducts.slice(0, 5)
+    newProducts: newProducts.slice(0, 5),
+    showModal: state.home
   }
 }
 
@@ -95,6 +92,9 @@ const mapDispatchToProps = dispatch => {
     },
     clearProducts: () => {
       dispatch(getAllProducts([]))
+    },
+    clearModal: () => {
+      dispatch(clearHomePromo())
     }
   }
 }
