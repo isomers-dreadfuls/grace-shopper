@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+import {Button, Icon} from 'semantic-ui-react'
 
 /**
  * COMPONENT
@@ -25,13 +26,22 @@ const AuthForm = props => {
           <input name="password" type="password" />
         </div>
         <div>
-          <button type="submit">{displayName}</button>
+          <Button type="submit">{displayName}</Button>
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <a href="/auth/google">
-        <img src="/img/google-button.png" width="250px" height="55px" />
-      </a>
+      <Button
+        color="blue"
+        onClick={() => {
+          history.push('/auth/google')
+        }}
+        animated="vertical"
+      >
+        <Button.Content visible>Sign in with Google</Button.Content>
+        <Button.Content hidden>
+          <Icon name="google" />
+        </Button.Content>
+      </Button>
     </div>
   )
 }

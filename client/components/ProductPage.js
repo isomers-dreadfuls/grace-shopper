@@ -64,7 +64,7 @@ class ProductPage extends React.Component {
       case this.state.purchase === 'disabled':
         return (
           <Button disabled style={{width: '80%'}} primary>
-            Add to Cart
+            Please Select a Size
           </Button>
         )
       case this.state.purchase === 'loading':

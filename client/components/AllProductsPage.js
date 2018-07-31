@@ -1,10 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {
-  fetchAllProducts,
-  getAllProducts,
-  searchProducts
-} from '../store/product'
+import {fetchAllProducts, getAllProducts, setSearch} from '../store/product'
 import {ProductCard, Sidebar} from './index'
 import {Grid} from 'semantic-ui-react'
 
@@ -36,15 +32,16 @@ class AllProductsPage extends React.Component {
     newState[event.target.value] = 1 - newState[event.target.value]
     this.setState({sizeRange: newState})
   }
-  async componentDidMount() {
-    if (this.props.search) {
-      await this.props.searchResult(this.props.search)
+  componentDidMount() {
+    if (this.state.search) {
+      this.props.fetchAllProducts(this.state.search)
     } else {
-      await this.props.fetchAllProducts()
+      this.props.fetchAllProducts()
     }
   }
   componentWillUnmount() {
-    this.props.searchResult('')
+    this.props.clearSearch()
+    this.props.clearProducts()
   }
   clearFilters() {
     this.setState(defaultState)
@@ -142,8 +139,8 @@ const mapDispatchToProps = dispatch => {
     clearProducts: () => {
       dispatch(getAllProducts([]))
     },
-    searchResult: searchKey => {
-      dispatch(searchProducts(searchKey))
+    clearSearch: () => {
+      dispatch(setSearch(''))
     }
   }
 }
