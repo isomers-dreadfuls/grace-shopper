@@ -3,8 +3,22 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
+import {Button, Header, Modal, Icon} from 'semantic-ui-react'
 
 class Homepage extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isParentOpen: true
+    }
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick = () => {
+    this.setState({
+      isParentOpen: !this.state.isParentOpen
+    })
+  }
   async componentDidMount() {
     await this.props.fetchAllProducts()
   }
@@ -15,7 +29,22 @@ class Homepage extends React.Component {
     const newProducts = this.props.newProducts
     return (
       <React.Fragment>
-        <div id="home-page-banner-container">
+        <div id="home-page-banner-container" onClick={this.handleClick}>
+          <Modal
+            open={this.state.isParentOpen}
+            size="fullscreen"
+            dimmer="blurring"
+          >
+            <Modal.Content>
+              <Modal.Description>
+                <div className="promoModel">
+                  <div className="promoModelCopy">
+                    LIMITED OFFER: BUY 3 UGLY SWEATERS AND GET THE 4TH FREE!
+                  </div>
+                </div>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
           <img src="img/banner1.png" alt="banner image 1" />
           <Link to="/products" id="home-page-banner-button">
             Shop All Sweaters <i className="fas fa-arrow-right" />

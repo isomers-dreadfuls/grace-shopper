@@ -175,3 +175,25 @@ a {
 #icons a {
   margin: 0 15px;
 }
+
+.cartSummaryDiscount {
+  color: #3ea93e;
+}
+
+.promoModel {
+  height: 164px;
+  background-image: url('img/uglybanner.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #a41d21;
+}
+.promoModelCopy {
+  color: #008000;
+  text-align: center;
+  position: relative;
+  top: 40%;
+  font-size: 30px;
+  font-weight: bolder;
+  background-color: azure;
+  opacity: 0.8;
+}
