@@ -184,20 +184,19 @@ a {
   color: #3ea93e;
 }
 
-.promoModel {
+.promoModal {
   height: 164px;
   background-image: url('img/uglybanner.png');
   background-repeat: no-repeat;
   background-position: center;
   background-color: #a41d21;
 }
-.promoModelCopy {
-  color: #008000;
+.promoModalCopy {
+  color: #800000;
   text-align: center;
   position: relative;
   top: 40%;
   font-size: 30px;
   font-weight: bolder;
-  background-color: azure;
-  opacity: 0.8;
+  background-color: rgb(110, 218, 117);
 }
