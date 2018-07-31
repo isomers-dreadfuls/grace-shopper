@@ -1,9 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProduct, getProduct} from '../store/product'
-import {ReviewsList} from './index'
+import {
+  fetchProduct,
+  getProduct,
+  fetchAllProducts,
+  getAllProducts
+} from '../store/product'
+import {ReviewsList, ProductCard} from './index'
 import {addToUserCart} from '../store/cart'
-import {Grid, Button, Tab} from 'semantic-ui-react'
+import {Grid, Button, Tab, Divider} from 'semantic-ui-react'
 
 class ProductPage extends React.Component {
   constructor() {
@@ -19,9 +24,11 @@ class ProductPage extends React.Component {
   }
   componentDidMount() {
     this.props.fetchProduct()
+    this.props.fetchAllProducts()
   }
   componentWillUnmount() {
     this.props.unMountProduct()
+    this.props.clearProducts()
   }
   // function that changes the maximum quantity of item that can be purchased, based on the currently selected size
   // it also resets the purchase state to 'false'
@@ -136,8 +143,9 @@ class ProductPage extends React.Component {
         )
       }
     ]
+    const similarProducts = this.props.similarProducts
     return (
-      <div id="product-page-container">
+      <div id="product-page-container" style={{marginTop: '20px'}}>
         <Grid columns={2}>
           <Grid.Column>
             <img style={{height: '500px'}} src={singleProduct.image} />
@@ -201,6 +209,16 @@ class ProductPage extends React.Component {
             </div>
           </Grid.Column>
         </Grid>
+        <Divider />
+        <center style={{margin: '20px'}}>
+          <h3>Shop Similar Products</h3>
+        </center>
+        <div id="home-page-new-products" className="ui six cards">
+          {similarProducts.map(product => {
+            return <ProductCard key={product.id} product={product} />
+          })}
+        </div>
+        <Divider />
         <ReviewsList />
       </div>
     )
@@ -209,7 +227,11 @@ class ProductPage extends React.Component {
 
 const mapStateToProps = state => {
   const singleProduct = state.product.singleProduct || {}
+  let allProducts = state.product.allProducts.filter(
+    prod => prod.id !== singleProduct.id
+  )
   return {
+    similarProducts: allProducts.slice(0, 6),
     user: state.user,
     singleProduct: singleProduct,
     inventories: singleProduct.inventories || []
@@ -226,6 +248,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     addToUserCart: ids => {
       dispatch(addToUserCart(ids))
+    },
+    fetchAllProducts: () => {
+      dispatch(fetchAllProducts())
+    },
+    clearProducts: () => {
+      dispatch(getAllProducts([]))
     }
   }
 }

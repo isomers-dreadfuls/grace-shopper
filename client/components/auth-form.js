@@ -32,18 +32,14 @@ const AuthForm = props => {
         </div>
         {error && error.response && <div> {error.response.data} </div>}
       </form>
-      <Button
-        color="blue"
-        onClick={() => {
-          history.push('/auth/google')
-        }}
-        animated="vertical"
-      >
-        <Button.Content visible>Sign in with Google</Button.Content>
-        <Button.Content hidden>
-          <Icon name="google" />
-        </Button.Content>
-      </Button>
+      <a href="/auth/google">
+        <Button color="blue" animated="vertical">
+          <Button.Content visible>Sign in with Google</Button.Content>
+          <Button.Content hidden>
+            <Icon name="google" />
+          </Button.Content>
+        </Button>
+      </a>
     </div>
   )
 }
