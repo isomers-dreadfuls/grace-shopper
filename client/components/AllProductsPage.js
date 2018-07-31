@@ -90,6 +90,17 @@ class AllProductsPage extends React.Component {
     )
     return (
       <React.Fragment>
+        <center style={{margin: '20px'}}>
+          {this.props.search ? (
+            <h3>
+              Showing {this.props.allProducts.length} related to "{
+                this.props.search
+              }"
+            </h3>
+          ) : (
+            <h3>All Products</h3>
+          )}
+        </center>
         <Grid columns={2}>
           <Grid.Column width={3}>
             <Sidebar
@@ -103,15 +114,6 @@ class AllProductsPage extends React.Component {
             />
           </Grid.Column>
           <Grid.Column width={12}>
-            {this.props.search ? (
-              <h3>
-                Showing {this.props.allProducts.length} related to "{
-                  this.props.search
-                }"
-              </h3>
-            ) : (
-              <h3>All Products</h3>
-            )}
             <div className="ui four cards">
               {productsList.map(product => {
                 return <ProductCard key={product.id} product={product} />

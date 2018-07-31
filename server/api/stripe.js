@@ -21,7 +21,7 @@ router.post('/', async (req, res, next) => {
     // if there is enough inventory, then create a new stripe charge
     // console.log('sending stripe:  ', Number(req.body.amount * 100))
     await stripe.charges.create({
-      amount: Number(req.body.amount) * 100,
+      amount: Math.round(Number(req.body.amount) * 100),
       currency: 'usd',
       description: 'An example charge',
       source: req.body.id

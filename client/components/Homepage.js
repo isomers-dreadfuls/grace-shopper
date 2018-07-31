@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
+import {Divider} from 'semantic-ui-react'
 
 class Homepage extends React.Component {
   async componentDidMount() {
@@ -21,6 +22,7 @@ class Homepage extends React.Component {
             Shop All Sweaters <i className="fas fa-arrow-right" />
           </Link>
         </div>
+        <Divider />
         <div id="home-page-new-products-container">
           <h3>New Sweaters</h3>
           <div id="home-page-new-products" className="ui five cards">
@@ -29,6 +31,7 @@ class Homepage extends React.Component {
             })}
           </div>
         </div>
+        <Divider />
         <div id="home-page-press-container">
           <h3>Featured In</h3>
           <span>

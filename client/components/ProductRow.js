@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {editUserCart, deleteFromUserCart} from '../store/cart'
-import {Grid, Image, Header} from 'semantic-ui-react'
+import {Divider, Grid, Image, Header, Button} from 'semantic-ui-react'
 
 const ProductRow = props => {
   const quantity = []
@@ -12,13 +12,13 @@ const ProductRow = props => {
     <React.Fragment>
       <Grid.Row>
         <Grid.Column width={2}>
-          <Image size="small" src={props.product.inventory.product.image} />
+          <Image size="medium" src={props.product.inventory.product.image} />
         </Grid.Column>
         <Grid.Column width={6}>
           <Header as="h3">{props.product.inventory.product.name}</Header>
           <Header as="h4">Size: {props.product.inventory.size}</Header>
           <Header as="h5">{props.product.inventory.product.description}</Header>
-          <button
+          <Button
             type="submit"
             onClick={() => {
               props.deleteFromUserCart({
@@ -28,7 +28,7 @@ const ProductRow = props => {
             }}
           >
             Remove from Cart
-          </button>
+          </Button>
         </Grid.Column>
         <Grid.Column width={2}>
           <Header as="h4">${props.product.inventory.product.price}</Header>
@@ -56,10 +56,11 @@ const ProductRow = props => {
                 )
               })}
             </select>
-            <button type="submit">Update</button>
+            <Button type="submit">Update</Button>
           </form>
         </Grid.Column>
       </Grid.Row>
+      <Divider />
     </React.Fragment>
   )
 }
