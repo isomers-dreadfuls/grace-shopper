@@ -8,6 +8,9 @@ const CartSummary = props => {
   return (
     <React.Fragment>
       <h2>Cart Summary</h2>
+      <h4 className="cartSummaryDiscount">
+        Buy any 3 sweaters and get the 4th one free!
+      </h4>
       <Divider />
       {props.cart.map(cartItem => {
         return (
@@ -19,7 +22,7 @@ const CartSummary = props => {
         )
       })}
       {subtotal[1] > 0 ? (
-        <h4>
+        <h4 className="cartSummaryDiscount">
           {subtotal[2]} x Family Discount: -${subtotal[1]}
         </h4>
       ) : null}

@@ -3,9 +3,18 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
-import {Divider} from 'semantic-ui-react'
+import {clearHomePromo} from '../store/home'
+import {Modal, Divider} from 'semantic-ui-react'
 
 class Homepage extends React.Component {
+  constructor() {
+    super()
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick = () => {
+    this.props.clearModal()
+  }
   async componentDidMount() {
     await this.props.fetchAllProducts()
   }
@@ -16,7 +25,22 @@ class Homepage extends React.Component {
     const newProducts = this.props.newProducts
     return (
       <React.Fragment>
-        <div id="home-page-banner-container">
+        <div id="home-page-banner-container" onClick={this.handleClick}>
+          <Modal
+            open={this.props.showModal}
+            size="fullscreen"
+            dimmer="blurring"
+          >
+            <Modal.Content>
+              <Modal.Description>
+                <div className="promoModal">
+                  <div className="promoModalCopy">
+                    LIMITED OFFER: BUY 3 UGLY SWEATERS AND GET THE 4TH FREE!
+                  </div>
+                </div>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
           <img src="img/banner1.png" alt="banner image 1" />
           <Link to="/products" id="home-page-banner-button">
             Shop All Sweaters <i className="fas fa-arrow-right" />
@@ -58,7 +82,8 @@ const mapStateToProps = state => {
   let allProducts = state.product.allProducts
   let newProducts = allProducts.sort((a, b) => a.createdAt > b.createdAt)
   return {
-    newProducts: newProducts.slice(0, 5)
+    newProducts: newProducts.slice(0, 5),
+    showModal: state.home
   }
 }
 
@@ -69,6 +94,9 @@ const mapDispatchToProps = dispatch => {
     },
     clearProducts: () => {
       dispatch(getAllProducts([]))
+    },
+    clearModal: () => {
+      dispatch(clearHomePromo())
     }
   }
 }
