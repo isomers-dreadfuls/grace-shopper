@@ -11,25 +11,23 @@ class OrdersPage extends React.Component {
   render() {
     return (
       <div id="orders-page-container">
-        <React.Fragment>
-          <h3>Orders</h3>
-          <Grid>
-            {this.props.orders.map(order => (
-              <Grid.Row key={order.id}>
-                <Grid.Column width={2}>
-                  <h4>Order ID: {order.id}</h4>
-                </Grid.Column>
-                <Grid.Column width={2}>
-                  <h5>Total: ${order.price.toFixed(2)}</h5>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <h5>Status: {order.orderStatus}</h5>
-                </Grid.Column>
-              </Grid.Row>
-            ))}
-          </Grid>
-          {/* <CartSummary /> */}
-        </React.Fragment>
+        <h3>Orders</h3>
+        <Grid columns={3}>
+          {this.props.orders.map(order => (
+            <Grid.Row key={order.id}>
+              <Grid.Column width={5}>
+                <h4>Order ID: {order.id}</h4>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <h5>Total: ${order.price}</h5>
+              </Grid.Column>
+              <Grid.Column width={5}>
+                <h5>Status: {order.orderStatus}</h5>
+              </Grid.Column>
+            </Grid.Row>
+          ))}
+        </Grid>
+        {/* <CartSummary /> */}
       </div>
     )
   }
