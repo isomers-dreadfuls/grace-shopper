@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {logout} from '../store'
 import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
-import {searchProducts} from '../store/product'
+import {fetchAllProducts} from '../store/product'
 
 const Navbar = props => {
   const {handleClick, isLoggedIn, user} = props
@@ -122,7 +122,7 @@ const mapDispatch = dispatch => {
       dispatch(logout())
     },
     search: searchKey => {
-      dispatch(searchProducts(searchKey))
+      dispatch(fetchAllProducts(searchKey))
     }
   }
 }

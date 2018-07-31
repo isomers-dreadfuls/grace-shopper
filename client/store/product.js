@@ -3,7 +3,6 @@ import axios from 'axios'
 const GET_PRODUCT = 'GET_PRODUCT'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const SET_SEARCH = 'SET_SEARCH'
-const SEARCH_PRODUCT = 'SEARCH_PRODUCT'
 
 const initialState = {
   allProducts: [],
@@ -23,10 +22,14 @@ export const getAllProducts = allProducts => ({
   allProducts
 })
 
-export const setSearch = searchString => ({
-  type: SET_SEARCH,
-  searchString
-})
+let storeString = ''
+export const setSearch = searchString => {
+  storeString = searchString
+  return {
+    type: SET_SEARCH,
+    searchString
+  }
+}
 
 // this route is for retrieving one product from the database using the product id
 export const fetchProduct = productId => async dispatch => {
@@ -37,28 +40,20 @@ export const fetchProduct = productId => async dispatch => {
 }
 
 // this route is for retrieving all the products from the database
-export const fetchAllProducts = () => async dispatch => {
+export const fetchAllProducts = key => async dispatch => {
+  if (key) {
+    dispatch(setSearch(key))
+  }
   const res = await axios.get('/api/products')
-  const allProducts = res.data
-  const action = getAllProducts(allProducts)
-  dispatch(action)
-}
-
-export const searchProducts = searchKey => async dispatch => {
-  const res = await axios.get('/api/products')
-  const all = res.data
-  const returnArray = all.filter((product) => {
-    if(searchKey) {
-    const query = searchKey.toUpperCase()
-    const productName = product.name.toUpperCase()
-    return (productName.includes(query))
-    }
-    else{
-      return (product)
-    }
-  })
-  dispatch(setSearch(searchKey))
-  dispatch(getAllProducts(returnArray))
+  let allProducts = res.data
+  if (storeString) {
+    allProducts = allProducts.filter(product => {
+      const query = key.toUpperCase()
+      const productName = product.name.toUpperCase()
+      return productName.includes(query)
+    })
+  }
+  dispatch(getAllProducts(allProducts))
 }
 
 // this route is for adding a review to a specific product

@@ -12,7 +12,7 @@ const CartSummary = props => {
       </h4>
       {props.cart.map(cartItem => {
         return (
-          <h4 key={cartItem.id}>
+          <h4 key={cartItem.inventoryId}>
             {cartItem.quantity} x {cartItem.inventory.product.name}({
               cartItem.inventory.size
             }): ${cartItem.inventory.product.price}
