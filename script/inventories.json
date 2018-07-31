@@ -203,5 +203,20 @@
     "size": "Large",
     "quantity": 1,
     "productId": 14
+  },
+  {
+    "size": "Small",
+    "quantity": 5,
+    "productId": 15
+  },
+  {
+    "size": "Medium",
+    "quantity": 5,
+    "productId": 15
+  },
+  {
+    "size": "Large",
+    "quantity": 1,
+    "productId": 15
   }
 ]
