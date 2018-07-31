@@ -33,7 +33,7 @@ router.post('/', async (req, res, next) => {
       shippingCity: 'test',
       shippingState: 'test',
       shippingZip: 11111,
-      price: Number(req.body.amount) * 10,
+      price: Number(req.body.amount),
       userId: req.body.userId,
       orderStatus: 'placed'
     })
