@@ -28,10 +28,14 @@ class ReviewsList extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <h3>Reviews:</h3>
-        {this.props.allReviews.map(review => {
-          return <ReviewCard key={review.id} review={review} />
-        })}
+        <center style={{margin: '40px'}}>
+          <h3>Reviews</h3>
+        </center>
+        <div className="ui three cards">
+          {this.props.allReviews.map(review => {
+            return <ReviewCard key={review.id} review={review} />
+          })}
+        </div>
         <h3>Leave a Review:</h3>
         <form className="ui form" onSubmit={this.handleSubmit}>
           <Rating
