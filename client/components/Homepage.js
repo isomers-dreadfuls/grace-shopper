@@ -9,14 +9,14 @@ class Homepage extends React.Component {
   constructor() {
     super()
     this.state = {
-      isParentOpen: true
+      showModal: true
     }
     this.handleClick = this.handleClick.bind(this)
   }
 
   handleClick = () => {
     this.setState({
-      isParentOpen: !this.state.isParentOpen
+      showModal: false
     })
   }
   async componentDidMount() {
@@ -31,14 +31,14 @@ class Homepage extends React.Component {
       <React.Fragment>
         <div id="home-page-banner-container" onClick={this.handleClick}>
           <Modal
-            open={this.state.isParentOpen}
+            open={this.state.showModal}
             size="fullscreen"
             dimmer="blurring"
           >
             <Modal.Content>
               <Modal.Description>
-                <div className="promoModel">
-                  <div className="promoModelCopy">
+                <div className="promoModal">
+                  <div className="promoModalCopy">
                     LIMITED OFFER: BUY 3 UGLY SWEATERS AND GET THE 4TH FREE!
                   </div>
                 </div>
