@@ -2,7 +2,10 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
+<<<<<<< HEAD
 import {Button, Icon} from 'semantic-ui-react'
+=======
+>>>>>>> 7ca12452e428d13e71771883c0707049520618f8
 
 /**
  * COMPONENT
