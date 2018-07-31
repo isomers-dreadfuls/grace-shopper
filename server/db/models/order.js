@@ -3,10 +3,10 @@ const db = require('../db')
 
 const Order = db.define('order', {
   price: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.DECIMAL(10, 2),
     allowNull: false,
     validate: {
-      notEmpty: true
+      isDecimal: true
     }
   },
   shippingAddress: {

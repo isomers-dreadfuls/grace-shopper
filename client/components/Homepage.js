@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {fetchAllProducts, getAllProducts} from '../store/product'
 import {ProductCard} from './index'
+import {Image} from 'semantic-ui-react'
 
 class Homepage extends React.Component {
   async componentDidMount() {
@@ -31,12 +32,36 @@ class Homepage extends React.Component {
         </div>
         <div id="home-page-press-container">
           <h3>Featured In</h3>
-          <span>
-            <img src="img/techcrunch.png" alt="tc logo" />
-            <img src="img/elle.svg" alt="elle logo" />
-            <img src="img/gq.png" alt="gq logo" />
-            <img src="img/vogue.svg" alt="vogue logo" />
-          </span>
+          <Image.Group size="small">
+            <Image
+              src="img/techcrunch.png"
+              as="a"
+              href="https://techcrunch.com/"
+              target="_blank"
+              alt="Tech Crunch logo"
+            />
+            <Image
+              src="img/elle.svg"
+              as="a"
+              href="https://www.elle.com/"
+              target="_blank"
+              alt="Elle logo"
+            />
+            <Image
+              src="img/gq.png"
+              as="a"
+              href="https://www.gq.com/"
+              target="_blank"
+              alt="GQ logo"
+            />
+            <Image
+              src="img/vogue.svg"
+              as="a"
+              href="https://www.vogue.com/"
+              target="_blank"
+              alt="Vogue logo"
+            />
+          </Image.Group>
         </div>
       </React.Fragment>
     )

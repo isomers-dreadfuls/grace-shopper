@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {editUserCart, deleteFromUserCart} from '../store/cart'
-import {Grid, Image, Header, Segment} from 'semantic-ui-react'
+import {Grid, Image, Header} from 'semantic-ui-react'
 
 const ProductRow = props => {
   const quantity = []
