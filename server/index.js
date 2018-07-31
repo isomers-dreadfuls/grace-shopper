@@ -40,7 +40,7 @@ passport.deserializeUser(async (id, done) => {
     }
     else{
       done(null, {
-        id: 3,
+        id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,

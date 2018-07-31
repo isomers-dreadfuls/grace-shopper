@@ -3,6 +3,7 @@ const {User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
+    console.log(req.user)
     if(req.user.isAdmin) {
       const users = await User.findAll()
       res.json(users)
@@ -11,7 +12,7 @@ router.get('/', async (req, res, next) => {
       res.status(500).send("Access Denied")
     }
   } catch (error) {
-    next(error)
+    res.json("ACCESS DENIED")
   }
 })
 

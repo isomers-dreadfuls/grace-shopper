@@ -5,7 +5,14 @@ module.exports = router
 router.get('/:id', async (req, res, next) => {
   try {
     const orders = await Order.findAll({where: {userId: req.params.id}})
-    res.json(orders)
+    if(req.user.id == req.params.id || req.user.isAdmin) {
+      res.json(orders)
+    }
+
+    else {
+      res.json("ACCESS DENIED")
+    }
+
   } catch (error) {
     next(error)
   }
