@@ -1,10 +1,10 @@
 import React from 'react'
 import {injectStripe, CardElement} from 'react-stripe-elements'
-import {Link} from 'react-router-dom'
-import {Dimmer, Loader} from 'semantic-ui-react'
+import {Dimmer, Loader, Modal, Button} from 'semantic-ui-react'
 import {CartSummary} from './index'
 import {connect} from 'react-redux'
 import {checkout} from '../store/cart'
+import history from '../history'
 
 class CheckoutForm extends React.Component {
   constructor() {
@@ -34,27 +34,39 @@ class CheckoutForm extends React.Component {
   }
 
   render() {
-    return this.state.complete ? (
-      <div>
-        <h3>Purchase Complete!</h3>
-        <Link to="/products" className="item">
-          Click here to buy more items!
-        </Link>
-      </div>
-    ) : (
-      <div id="payment-container">
-        <Dimmer className="loading" active={this.state.loading}>
-          <Loader>Loading</Loader>
-        </Dimmer>
-        <CartSummary cart={this.props.cart} />
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <h3>Card Details</h3>
-            <CardElement />
-          </label>
-          <button type="submit">Confirm Order</button>
-        </form>
-      </div>
+    return (
+      <React.Fragment>
+        <Modal dimmer="blurring" open={this.state.complete}>
+          <Modal.Header>Purchase Complete!</Modal.Header>
+          <Modal.Actions>
+            <Button
+              positive
+              onClick={() => {
+                history.push('/products')
+              }}
+            >
+              Click here to buy more sweaters!
+            </Button>
+          </Modal.Actions>
+        </Modal>
+        <div id="payment-container">
+          <Dimmer
+            dimmer="blurring"
+            className="loading"
+            active={this.state.loading}
+          >
+            <Loader>Loading</Loader>
+          </Dimmer>
+          <CartSummary cart={this.props.cart} />
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <h3>Card Details</h3>
+              <CardElement />
+            </label>
+            <button type="submit">Confirm Order</button>
+          </form>
+        </div>
+      </React.Fragment>
     )
   }
 }
