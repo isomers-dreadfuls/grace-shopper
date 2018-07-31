@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import {injectStripe, CardElement} from 'react-stripe-elements'
 import {Link} from 'react-router-dom'
 import {Dimmer, Loader} from 'semantic-ui-react'
