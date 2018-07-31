@@ -82,5 +82,11 @@
     "price": 50.0,
     "image": "/img/product/elf-sweater.jpg",
     "description": "Elf sweater description."
+  },
+  {
+    "name": "Bikini Sasquatch",
+    "price": 50.0,
+    "image": "/img/product/bikini-sasquatch-sweater.jpg",
+    "description": "Bikini Sasquatch Sweater description."
   }
 ]
