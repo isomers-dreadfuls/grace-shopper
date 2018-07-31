@@ -35,11 +35,28 @@ passport.serializeUser((user, done) => done(null, user.id))
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await db.models.user.findById(id)
-    done(null, user)
+    if(user.isAdmin){
+      done(null,user)
+    }
+    else{
+      done(null, {
+        id: 3,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        googleId: user.googleId,
+        userAddress: user.userAddress,
+        userCity: user.userCity,
+        userState: user.userState,
+        userZip: user.userZip,
+      })
+    }
   } catch (err) {
     done(err)
   }
 })
+//only want certain fields here (when they aren't admin)
+//if()
 
 const createApp = () => {
   // logging middleware
