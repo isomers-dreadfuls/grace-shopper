@@ -98,7 +98,7 @@ class AllProductsPage extends React.Component {
               }"
             </h3>
           ) : (
-            <h3>All Products</h3>
+            <h3>All Sweaters</h3>
           )}
         </center>
         <Grid columns={2}>

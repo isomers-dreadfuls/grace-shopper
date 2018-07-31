@@ -4,10 +4,6 @@ import {fetchSingleUser} from '../store'
 import {Link} from 'react-router-dom'
 
 class UserInfoPage extends Component {
-  constructor() {
-    super()
-  }
-
   componentDidMount() {
     this.props.fetchUser(this.props.match.params.id)
   }
