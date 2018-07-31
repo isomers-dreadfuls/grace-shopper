@@ -1,5 +1,4 @@
 import axios from 'axios'
-import store from './index'
 
 const GET_PRODUCT = 'GET_PRODUCT'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
@@ -23,10 +22,14 @@ export const getAllProducts = allProducts => ({
   allProducts
 })
 
-export const setSearch = searchString => ({
-  type: SET_SEARCH,
-  searchString
-})
+let storeString = ''
+export const setSearch = searchString => {
+  storeString = searchString
+  return {
+    type: SET_SEARCH,
+    searchString
+  }
+}
 
 // this route is for retrieving one product from the database using the product id
 export const fetchProduct = productId => async dispatch => {
@@ -43,7 +46,7 @@ export const fetchAllProducts = key => async dispatch => {
   }
   const res = await axios.get('/api/products')
   let allProducts = res.data
-  if (store.getState().product.search) {
+  if (storeString) {
     allProducts = allProducts.filter(product => {
       const query = key.toUpperCase()
       const productName = product.name.toUpperCase()
