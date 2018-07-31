@@ -2,6 +2,7 @@ const path = require('path')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const morgan = require('morgan')
+const helmet = require('helmet')
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
@@ -52,6 +53,9 @@ const createApp = () => {
 
   // compression middleware
   app.use(compression())
+
+  // helmet middleware
+  app.use(helmet())
 
   // session middleware with passport
   app.use(
