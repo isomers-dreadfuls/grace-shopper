@@ -36,11 +36,6 @@ class AllProductsPage extends React.Component {
     newState[event.target.value] = 1 - newState[event.target.value]
     this.setState({sizeRange: newState})
   }
-
-  //Mounting Hooks
-  componentWillMount() {
-    this.props.clearProducts()
-  }
   async componentDidMount() {
     if (this.props.search) {
       await this.props.searchResult(this.props.search)

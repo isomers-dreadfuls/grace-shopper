@@ -61,10 +61,18 @@ class Homepage extends React.Component {
         <div id="home-page-press-container">
           <h3>Featured In</h3>
           <span>
-            <img src="img/techcrunch.png" alt="tc logo" />
-            <img src="img/elle.svg" alt="elle logo" />
-            <img src="img/gq.png" alt="gq logo" />
-            <img src="img/vogue.svg" alt="vogue logo" />
+            <a href="https://techcrunch.com/">
+              <img src="img/techcrunch.png" alt="tc logo" />
+            </a>
+            <a href="https://www.elle.com/">
+              <img src="img/elle.svg" alt="elle logo" />
+            </a>
+            <a href="https://www.gq.com/">
+              <img src="img/gq.png" alt="gq logo" />
+            </a>
+            <a href="https://www.vogue.com/">
+              <img src="img/vogue.svg" alt="vogue logo" />
+            </a>
           </span>
         </div>
       </React.Fragment>
