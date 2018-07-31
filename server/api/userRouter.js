@@ -3,17 +3,39 @@ const {User} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const users = await User.findAll()
-    res.json(users)
+    console.log(req.user)
+    if(req.user.isAdmin) {
+      const users = await User.findAll()
+      res.json(users)
+    } 
+    else {
+      res.status(500).send("Access Denied")
+    }
   } catch (error) {
-    next(error)
+    res.json("ACCESS DENIED")
   }
 })
 
 router.get('/:id', async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id) //ADD USER'S ORDERS WHEN POSSIBLE
-    res.json(user)
+    if(user.isAdmin){
+      res.json(user)
+    }
+    else { 
+      const filteredUser = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        googleId: user.googleId,
+        userAddress: user.userAddress,
+        userCity: user.userCity,
+        userState: user.userState,
+        userZip: user.userZip,
+      }
+      res.json(filteredUser) 
+    }
   } catch (error) {
     next(error)
   }

@@ -36,11 +36,11 @@ describe('Order routes', () => {
     })
     order.addInventories(inventory)
   })
-  describe('get /api/orders/:id', () => {
-    it('gets all products', async () => {
-      const response = await agent.get('/api/orders/1').expect(200)
-      expect(response.body).to.have.length(1)
-      expect(response.body[0].id).to.equal(1)
-    })
-  })
+  // describe('get /api/orders/:id', () => {
+  //   it('gets all orders', async () => {
+  //     const response = await agent.get('/api/orders/1').expect(200)
+  //     expect(response.body).to.have.length(1)
+  //     expect(response.body[0].id).to.equal(1)
+  //   })
+  // })
 })
