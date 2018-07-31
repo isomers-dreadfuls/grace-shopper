@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {ProductRow, CartSummary} from './index'
 import history from '../history'
-import {Grid, Button} from 'semantic-ui-react'
+import {Grid, Button, Divider} from 'semantic-ui-react'
 
 class CartPage extends React.Component {
   render() {
@@ -11,6 +11,7 @@ class CartPage extends React.Component {
       <div id="cart-page-container">
         <React.Fragment>
           <h2>Cart</h2>
+          <Divider />
           <Link to="/products" className="item">
             Your cart is empty. Click here to take a look at our products!
           </Link>
@@ -18,8 +19,9 @@ class CartPage extends React.Component {
       </div>
     ) : (
       <Grid columns={2} id="cart-page-container">
-        <Grid.Column width={12}>
+        <Grid.Column width={10}>
           <h2>Cart</h2>
+          <Divider />
           <Grid columns={4}>
             {this.props.cart.map(product => (
               <ProductRow key={product.inventoryId} product={product} />

@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {logout} from '../store'
 import {Dropdown, Menu, Label} from 'semantic-ui-react'
 import history from '../history'
-import {fetchAllProducts} from '../store/product'
+import {fetchAllProducts, setSearch} from '../store/product'
 
 const Navbar = props => {
   const {handleClick, isLoggedIn, user} = props
@@ -29,6 +29,22 @@ const Navbar = props => {
       onClick: handleClick
     }
   ]
+  const loginOptions = [
+    {
+      key: 1,
+      text: 'Sign In',
+      onClick: () => {
+        history.push('/login')
+      }
+    },
+    {
+      key: 2,
+      text: 'Create an Account',
+      onClick: () => {
+        history.push('/sign-up')
+      }
+    }
+  ]
   const handleSubmit = event => {
     event.preventDefault()
     props.search(event.target.search.value)
@@ -49,6 +65,7 @@ const Navbar = props => {
           </Menu.Item>
           <Menu.Item
             onClick={() => {
+              props.clearSearch()
               props.search()
               history.push('/products')
             }}
@@ -69,7 +86,11 @@ const Navbar = props => {
                 <button type="submit">Search</button>
               </form>
             </Menu.Item>
-
+            {isLoggedIn ? (
+              <Dropdown text="My Account" options={options} simple item />
+            ) : (
+              <Dropdown text="Sign In" options={loginOptions} simple item />
+            )}
             <Menu.Item
               onClick={() => {
                 history.push('/cart')
@@ -77,26 +98,6 @@ const Navbar = props => {
             >
               Cart<Label>{props.cart.length}</Label>
             </Menu.Item>
-            {isLoggedIn ? (
-              <Dropdown text="My Account" options={options} simple item />
-            ) : (
-              <React.Fragment>
-                <Menu.Item
-                  onClick={() => {
-                    history.push('/login')
-                  }}
-                >
-                  Login
-                </Menu.Item>
-                <Menu.Item
-                  onClick={() => {
-                    history.push('/sign-up')
-                  }}
-                >
-                  Signup
-                </Menu.Item>
-              </React.Fragment>
-            )}
           </div>
         </div>
       </div>
@@ -123,6 +124,9 @@ const mapDispatch = dispatch => {
     },
     search: searchKey => {
       dispatch(fetchAllProducts(searchKey))
+    },
+    clearSearch: () => {
+      dispatch(setSearch(''))
     }
   }
 }

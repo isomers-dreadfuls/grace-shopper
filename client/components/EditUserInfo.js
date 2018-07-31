@@ -1,21 +1,22 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {updateUser} from '../store/user'
+import {updateUser} from "../store/user"
 
 class EditUserInfo extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
-      firstName: '',
-      lastName: '',
-      userAddress: '',
-      userCity: '',
-      userState: '',
-      userZip: ''
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
+      userAddress: this.props.user.userAddress,
+      userCity: this.props.user.userCity,
+      userState: this.props.user.userState,
+      userZip: this.props.user.userZip,
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
+
 
   handleChange(event) {
     this.setState({
@@ -25,87 +26,54 @@ class EditUserInfo extends Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    console.log(this.state)
-    console.log(this.props.user.id)
     this.props.update(this.state, this.props.user.id)
     this.props.history.push(`/users/${this.props.user.id}`)
   }
 
   render() {
-    return (
-      <div id="edit-user-info-page-container">
-        <React.Fragment>
-          <h3>Edit Your Information!</h3>
-          <form onSubmit={this.handleSubmit}>
+    return(
+      <React.Fragment>
+       
+        <h3>Edit Your Information!</h3>
+        <form onSubmit={this.handleSubmit}>
+          <div>
             <div>
-              <div>
-                <p>Last Name</p>
-                <input
-                  onChange={this.handleChange}
-                  type="text"
-                  name="lastName"
-                  value={this.state.lastName}
-                />
-              </div>
-              <div>
-                <p>First Name</p>
-                <input
-                  onChange={this.handleChange}
-                  type="text"
-                  name="firstName"
-                  value={this.state.firstName}
-                />
-              </div>
+              <p>Last Name</p>
+              <input onChange={this.handleChange} type="text" name="lastName" value={this.state.lastName}/>
             </div>
-            <a>Your Address:</a>
             <div>
-              <div>
-                <p>Address</p>
-                <input
-                  onChange={this.handleChange}
-                  type="text"
-                  name="userAddress"
-                  value={this.state.userAddress}
-                />
-              </div>
-              <div>
-                <p>City</p>
-                <input
-                  onChange={this.handleChange}
-                  type="text"
-                  name="userCity"
-                  value={this.state.userCity}
-                />
-              </div>
-              <div>
-                <p>State</p>
-                <input
-                  onChange={this.handleChange}
-                  type="text"
-                  name="userState"
-                  value={this.state.userState}
-                />
-              </div>
-              <div>
-                <p>Zip Code</p>
-                <input
-                  onChange={this.handleChange}
-                  type="number"
-                  name="userZip"
-                  value={this.state.userZip}
-                />
-              </div>
+              <p>First Name</p>
+              <input onChange={this.handleChange} type="text" name="firstName" value={this.state.firstName}/>
             </div>
-            <button type="submit">Save</button>
-          </form>
-        </React.Fragment>
-      </div>
+          </div>
+          <a>Your Address:</a>
+          <div>
+            <div>
+              <p>Address</p>
+              <input onChange={this.handleChange} type="text" name="userAddress" value={this.state.userAddress}/>
+            </div>
+            <div>
+              <p>City</p>
+              <input onChange={this.handleChange} type="text" name="userCity" value={this.state.userCity}/>
+            </div>
+            <div>
+              <p>State</p>
+              <input onChange={this.handleChange} type="text" name="userState" value={this.state.userState}/>
+            </div>
+            <div>
+              <p>Zip Code</p>
+              <input onChange={this.handleChange} type="number" name="userZip" value={this.state.userZip}/>
+            </div>
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </React.Fragment>
     )
   }
 }
 
 const mapStateToProps = state => {
-  return {
+  return { 
     user: state.user
   }
 }
@@ -118,6 +86,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const connectedEditUserInfo = connect(mapStateToProps, mapDispatchToProps)
+const connectedEditUserInfo = connect(mapStateToProps,mapDispatchToProps)
 
 export default connectedEditUserInfo(EditUserInfo)

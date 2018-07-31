@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
 import {Button, Icon} from 'semantic-ui-react'
+import history from '../history'
 
 /**
  * COMPONENT
@@ -12,6 +13,7 @@ const AuthForm = props => {
 
   return (
     <div id="auth-container">
+      <h2>{displayName}</h2>
       <form onSubmit={handleSubmit} name={name} id="auth-form">
         <div>
           <label htmlFor="email">
@@ -56,7 +58,7 @@ const AuthForm = props => {
 const mapLogin = state => {
   return {
     name: 'login',
-    displayName: 'Login',
+    displayName: 'Sign In',
     error: state.user.error
   }
 }
@@ -64,7 +66,7 @@ const mapLogin = state => {
 const mapSignup = state => {
   return {
     name: 'signup',
-    displayName: 'Sign Up',
+    displayName: 'Create an Account',
     error: state.user.error
   }
 }

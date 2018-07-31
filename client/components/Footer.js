@@ -18,13 +18,13 @@ const Footer = () => {
       </div>
       <div id="footer-right">
         <span id="icons">
-          <a href="#">
+          <a href="https://twitter.com/hashtag/uglysweater?src=hash">
             <i className="fab fa-twitter-square fa-lg" />
           </a>
-          <a href="#">
+          <a href="https://www.instagram.com/explore/tags/uglysweater/">
             <i className="fab fa-instagram fa-lg" />
           </a>
-          <a href="#">
+          <a href="https://www.pinterest.com/search/pins/?q=ugly%20sweater&rs=typed&term_meta[]=ugly%7Ctyped&term_meta[]=sweater%7Ctyped">
             <i className="fab fa-pinterest-square fa-lg" />
           </a>
         </span>

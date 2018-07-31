@@ -1,5 +1,6 @@
 import React from 'react'
 import {calculateSubtotal} from '../store/cart'
+import {Divider} from 'semantic-ui-react'
 
 const CartSummary = props => {
   const subtotal = calculateSubtotal(props.cart)
@@ -10,6 +11,7 @@ const CartSummary = props => {
       <h4 className="cartSummaryDiscount">
         Buy any 3 sweaters and get the 4th one free!
       </h4>
+      <Divider />
       {props.cart.map(cartItem => {
         return (
           <h4 key={cartItem.inventoryId}>
@@ -24,6 +26,7 @@ const CartSummary = props => {
           {subtotal[2]} x Family Discount: -${subtotal[1]}
         </h4>
       ) : null}
+      <Divider />
       <h3>Subtotal: ${subtotal[0]}</h3>
     </React.Fragment>
   )
