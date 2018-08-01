@@ -34,6 +34,7 @@ class Homepage extends React.Component {
             <Modal.Content>
               <Modal.Description>
                 <div className="promoModal">
+                  <img src="/img/uglybanner.png" />
                   <div className="promoModalCopy">
                     LIMITED OFFER: BUY 3 UGLY SWEATERS AND GET THE 4TH FREE!
                   </div>

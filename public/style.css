@@ -185,18 +185,19 @@ a {
 }
 
 .promoModal {
-  height: 164px;
-  background-image: url('img/uglybanner.png');
-  background-repeat: no-repeat;
-  background-position: center;
   background-color: #a41d21;
+}
+.promoModal img {
+  max-width: 100%;
+  display: block;
+  margin: auto;
 }
 .promoModalCopy {
   color: #800000;
   text-align: center;
   position: relative;
   top: 40%;
-  font-size: 30px;
+  font-size: 2vw;
   font-weight: bolder;
   background-color: rgb(110, 218, 117);
 }
