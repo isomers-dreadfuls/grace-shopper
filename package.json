@@ -36,7 +36,7 @@
   "license": "MIT",
   "dependencies": {
     "@opuscapita/react-searchbar": "^1.0.6",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "compression": "^1.7.3",
     "connect-session-sequelize": "^4.1.0",
     "cookie-parser": "^1.4.3",
